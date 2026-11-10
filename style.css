@@ -66,6 +66,10 @@ button { font-family: inherit; cursor: pointer; }
 .steps .bar { flex: 1; height: 2px; background: var(--gray); margin: 0 8px; }
 .steps .bar.on { background: var(--navy); }
 .steps .end { font-size: 13px; font-weight: 700; color: var(--sub); flex-shrink: 0; }
+.steps .end.on {                                   /* 結果画面：「結果」を紺色の丸で強調 */
+  height: 28px; padding: 0 12px; border-radius: 14px;
+  display: grid; place-items: center; background: var(--navy); color: #fff;
+}
 
 /* ---------- 質問の見出し（P2〜P4） ---------- */
 h2.q { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
@@ -167,6 +171,17 @@ select:focus { outline: none; border-color: var(--navy); }
 .feature .t { color: var(--navy); font-weight: 700; font-size: 15px; margin-bottom: 4px; }
 .feature .d { font-size: 12px; color: var(--sub); }
 .note { font-size: 12px; color: var(--sub); text-align: center; margin-top: 12px; }
+
+/* ---------- 診断中（P4→P5の間） ---------- */
+.loading { text-align: center; padding: 64px 28px; }
+.spinner {
+  width: 56px; height: 56px; margin: 0 auto 20px; border-radius: 50%;
+  border: 5px solid var(--navy-light); border-top-color: var(--navy);
+  animation: spin .9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-title { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.loading-sub { font-size: 13px; color: var(--sub); }
 
 /* ---------- P5 結果 ---------- */
 .result { display: grid; grid-template-columns: 1fr 382px; gap: 24px; }
@@ -322,6 +337,8 @@ select:focus { outline: none; border-color: var(--navy); }
   .sp-only { display: inline; }
 
   /* P1 TOP */
+  .top { gap: 4px; }                                 /* イラストと文字の間を詰める */
+  .top-illust { margin-top: -28px; }                 /* イラスト上の余白を詰める */
   .top h1 { font-size: 26px; }
   .features { grid-template-columns: 1fr; }
   .top > div:last-child { container-type: inline-size; }
@@ -350,7 +367,7 @@ select:focus { outline: none; border-color: var(--navy); }
 
   /* P7 CTA */
   .can { grid-template-columns: 1fr; }
-  .can svg { display: none; }
+  .can svg { justify-self: center; margin-top: -24px; }               /* オペレーターのイラストをリストの下・中央に表示 */
   .sub-btns { grid-template-columns: 1fr; }
 }
 

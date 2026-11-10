@@ -6,7 +6,7 @@
 <title>管理会社変更シミュレーター</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261111-1">
+<link rel="stylesheet" href="style.css?v=20261111-4">
 </head>
 <body>
 <div class="wrap">
@@ -39,7 +39,7 @@
         <div>
           <p class="catch">管理会社の変更って、実はカンタンです。</p>
           <h1>管理会社変更<br>シミュレーター</h1>
-          <p class="lead">いまの管理会社に<br class="sp-only">不満や不安はありませんか？<br>いくつかの質問に答えるだけで、<br>IFCに変更した場合の流れやサポート内容をご案内します。</p>
+          <p class="lead">いまの管理会社に<br class="sp-only">不満や不安はありませんか？<br>いくつかの質問に答えるだけで、<br>IFCに変更した場合の流れや<br class="sp-only">サポート内容をご案内します。</p>
         </div>
       </div>
       <div class="features">
@@ -106,6 +106,15 @@
         <button class="btn btn-ghost" data-go="p3">戻る</button>
         <button class="btn btn-primary" id="toP5" disabled>結果を見る</button>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== 診断中（P4→P5の間） ===== -->
+  <section class="screen" id="loading">
+    <div class="card narrow loading">
+      <div class="spinner" aria-hidden="true"></div>
+      <p class="loading-title">診断中…</p>
+      <p class="loading-sub">ご入力内容をもとに診断しています</p>
     </div>
   </section>
 
@@ -227,6 +236,6 @@
 
 <div class="mock-toast" id="toast"></div>
 
-<script src="script.js?v=20261111-1"></script>
+<script src="script.js?v=20261111-4"></script>
 </body>
 </html>
