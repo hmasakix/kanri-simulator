@@ -11,17 +11,17 @@ const ICON = {
 
 const CONCERNS = [
   { id: 'vacancy',   label: '空室がなかなか埋まらない',     icon: 'building', point: 15, solve: '空室に対して、募集戦略の見直しと改善提案を行います' },
-  { id: 'proposal',  label: '管理会社から提案がない',       icon: 'chat',     point: 10, solve: '専任担当が、収益改善策を定期的にご提案します' },
-  { id: 'rent',      label: '家賃が下がり続けている',       icon: 'yen',      point: 12, solve: '市場調査に基づく家賃査定で、適正な家賃設定をご提案します' },
-  { id: 'staff',     label: '担当者の対応に不満がある',     icon: 'person',   point: 10, solve: '定期的なレポート提出と改善提案で収益を最大化します' },
+  { id: 'proposal',  label: '管理会社から提案がない',       icon: 'chat',     point: 10, solve: '専任担当が物件の状況を定期的に分析し、空室対策や収益改善策をこちらからご提案します' },
+  { id: 'rent',      label: '家賃が下がり続けている',       icon: 'yen',      point: 12, solve: '周辺の相場や需要を調査し、適正な家賃設定と家賃を維持するための改善策をご提案します' },
+  { id: 'staff',     label: '担当者の対応に不満がある',     icon: 'person',   point: 10, solve: '専任担当がオーナー様の窓口となり、迅速なご連絡と定期的なご報告で安心してお任せいただけます' },
   { id: 'building',  label: '建物が古く、修繕が不安',       icon: 'tool',     point: 8, solve: '建物の状態を診断し、長期修繕計画をご提案します' },
   { id: 'cost',      label: '修繕費やコストが高い気がする', icon: 'calc',     point: 8, solve: '修繕費の見直しやコスト削減のアドバイスをします' },
   { id: 'inherit',   label: '相続や資産活用の相談がしたい', icon: 'people',   point: 5, solve: '相続や資産活用の専門家と連携し、トータルでサポートします' }
 ];
 const OTHER_POINT = 5;
 const OTHER_SOLVE = 'ご相談内容に合わせて、担当者が個別にご提案します';
-// 結果画面で、選択以外に表示する基本の解決策
-const DEFAULT_SOLVE_IDS = ['vacancy', 'staff', 'building', 'cost', 'inherit'];
+// 「その他」だけを選んだときに表示する一文
+const GENERAL_SOLVE = 'IFCがオーナー様の状況に合わせて、最適なご提案をします';
 
 const MANAGES = [
   { id: 'itaku',   label: '管理委託（一般管理）',     point: 8 },
@@ -166,25 +166,24 @@ function renderResult() {
   document.getElementById('resSummary').textContent =
     `${state.area}の${state.type}（${state.age}・${state.units}）、${manage.label}の物件として診断しました。`;
 
-  // 選んだお悩みへの対策を先頭に強調、残りを基本の解決策で埋める（最大5件）
+  // STEP1で選んだお悩みだけを「お悩み＋答え」のセットで並べる（選んだ順・選んだ数だけ）
   const check = '<svg class="check" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="var(--navy)"/><path d="M6 10.3l2.7 2.7L14 7.7" fill="none" stroke="#fff" stroke-width="2"/></svg>';
+  const item = (label, text) =>
+    `<div class="solve-item hit">${check}<span>${label ? `<span class="lbl">${label}</span>` : ''}${text}</span></div>`;
   let html = '';
-  const used = new Set();
-  picked.forEach(id => {
-    const c = CONCERNS.find(x => x.id === id);
-    html += `<div class="solve-item hit">${check}<span><span class="lbl">「${c.label}」への対策</span>${c.solve}</span></div>`;
-    used.add(id);
-  });
-  if (state.concerns.includes('other')) {
-    const label = state.other ? `「${state.other}」への対策` : '「その他」のお悩みへの対策';
-    html += `<div class="solve-item hit">${check}<span><span class="lbl">${escapeHtml(label)}</span>${OTHER_SOLVE}</span></div>`;
+  if (picked.length === 0) {
+    // 「その他」だけの場合は、一般的な一文
+    html = item('', GENERAL_SOLVE);
+  } else {
+    picked.forEach(id => {
+      const c = CONCERNS.find(x => x.id === id);
+      html += item(`「${c.label}」への対策`, c.solve);
+    });
+    if (state.concerns.includes('other')) {
+      const label = state.other ? `「${escapeHtml(state.other)}」への対策` : '「その他」のお悩みへの対策';
+      html += item(label, OTHER_SOLVE);
+    }
   }
-  let count = picked.length + (state.concerns.includes('other') ? 1 : 0);
-  DEFAULT_SOLVE_IDS.forEach(id => {
-    if (count >= 5 || used.has(id)) return;
-    html += `<div class="solve-item">${check}<span>${CONCERNS.find(x => x.id === id).solve}</span></div>`;
-    count++;
-  });
   document.getElementById('resSolve').innerHTML = html;
 
   const concernText = state.concerns.map(id =>
