@@ -138,6 +138,8 @@ select:focus { outline: none; border-color: var(--navy); }
 .btn-primary .arrow, .btn-orange .arrow { position: absolute; right: 20px; font-size: 22px; font-weight: 400; }
 .btn-ghost { background: #fff; color: var(--text); border-color: var(--line); flex: 1; }
 .btn-ghost:hover { background: #f7f8fa; }
+#restart { background: #f3f4f8; }                  /* 「最初からやり直す」はグレー */
+#restart:hover { background: #e9ebf1; }
 .btn-full { width: 100%; }
 
 /* P7「無料相談を申し込む」（目立たせる＋常に動く） */
