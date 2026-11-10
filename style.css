@@ -140,10 +140,10 @@ select:focus { outline: none; border-color: var(--navy); }
 .res-head h2 { font-size: 23px; line-height: 1.5; font-weight: 700; }
 .res-head h2 em { font-style: normal; color: var(--navy); }
 .score {
-  width: 96px; height: 96px; border-radius: 50%; background: var(--navy-light);
+  width: 118px; height: 118px; border-radius: 50%; background: var(--navy-light);
   display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.score b { font-size: 42px; color: var(--star); line-height: 1.1; }
+.score b { font-size: 63px; color: #f29a1c; line-height: 1; }
 .score span { font-size: 10px; color: var(--navy); font-weight: 700; }
 .stars { display: flex; gap: 4px; margin: 6px 0 20px; }
 .stars svg { width: 30px; height: 30px; }
