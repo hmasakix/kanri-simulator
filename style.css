@@ -321,3 +321,13 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     font-size: min(14px, calc(100cqw / 19.5));          /* 枠の幅に合わせて縮める */
   }
 }
+
+/* スマホ：結果の見出しを3行（管理会社の変更で、／改善できる／可能性が高いです。）に収める */
+@media (max-width: 560px) {
+  .res-head > div:first-child { container-type: inline-size; }
+  .res-head h2 {
+    white-space: nowrap;
+    font-size: min(19px, calc((100vw - 200px) / 11.2)); /* 古い端末向け */
+    font-size: min(19px, calc(100cqw / 11.2));          /* 枠の幅に合わせて縮める */
+  }
+}
