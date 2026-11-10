@@ -10,28 +10,32 @@ const ICON = {
 };
 
 const CONCERNS = [
-  { id: 'vacancy',   label: '空室がなかなか埋まらない',     icon: 'building', solve: '空室に対して、募集戦略の見直しと改善提案を行います' },
-  { id: 'proposal',  label: '管理会社から提案がない',       icon: 'chat',     solve: '専任担当が、収益改善策を定期的にご提案します' },
-  { id: 'rent',      label: '家賃が下がり続けている',       icon: 'yen',      solve: '市場調査に基づく家賃査定で、適正な家賃設定をご提案します' },
-  { id: 'staff',     label: '担当者の対応に不満がある',     icon: 'person',   solve: '定期的なレポート提出と改善提案で収益を最大化します' },
-  { id: 'building',  label: '建物が古く、修繕が不安',       icon: 'tool',     solve: '建物の状態を診断し、長期修繕計画をご提案します' },
-  { id: 'cost',      label: '修繕費やコストが高い気がする', icon: 'calc',     solve: '修繕費の見直しやコスト削減のアドバイスをします' },
-  { id: 'inherit',   label: '相続や資産活用の相談がしたい', icon: 'people',   solve: '相続や資産活用の専門家と連携し、トータルでサポートします' }
+  { id: 'vacancy',   label: '空室がなかなか埋まらない',     icon: 'building', point: 15, solve: '空室に対して、募集戦略の見直しと改善提案を行います' },
+  { id: 'proposal',  label: '管理会社から提案がない',       icon: 'chat',     point: 10, solve: '専任担当が、収益改善策を定期的にご提案します' },
+  { id: 'rent',      label: '家賃が下がり続けている',       icon: 'yen',      point: 12, solve: '市場調査に基づく家賃査定で、適正な家賃設定をご提案します' },
+  { id: 'staff',     label: '担当者の対応に不満がある',     icon: 'person',   point: 10, solve: '定期的なレポート提出と改善提案で収益を最大化します' },
+  { id: 'building',  label: '建物が古く、修繕が不安',       icon: 'tool',     point: 8, solve: '建物の状態を診断し、長期修繕計画をご提案します' },
+  { id: 'cost',      label: '修繕費やコストが高い気がする', icon: 'calc',     point: 8, solve: '修繕費の見直しやコスト削減のアドバイスをします' },
+  { id: 'inherit',   label: '相続や資産活用の相談がしたい', icon: 'people',   point: 5, solve: '相続や資産活用の専門家と連携し、トータルでサポートします' }
 ];
+const OTHER_POINT = 5;
 const OTHER_SOLVE = 'ご相談内容に合わせて、担当者が個別にご提案します';
 // 結果画面で、選択以外に表示する基本の解決策
 const DEFAULT_SOLVE_IDS = ['vacancy', 'staff', 'building', 'cost', 'inherit'];
 
 const MANAGES = [
-  { id: 'itaku',   label: '管理委託（一般管理）',     point: 5 },
-  { id: 'sublease',label: 'サブリース（一括借上）',   point: 10 },
-  { id: 'jishu',   label: '自主管理',                 point: 20 },
-  { id: 'ichibu',  label: '一部委託（集金のみなど）', point: 15 },
-  { id: 'unknown', label: 'その他・わからない',       point: 10 }
+  { id: 'itaku',   label: '管理委託（一般管理）',     point: 8 },
+  { id: 'sublease',label: 'サブリース（一括借上）',   point: 5 },
+  { id: 'jishu',   label: '自主管理',                 point: 15 },
+  { id: 'ichibu',  label: '一部委託（集金のみなど）', point: 12 },
+  { id: 'unknown', label: 'その他・わからない',       point: 8 }
 ];
 const TYPES = ['アパート', 'マンション', '戸建賃貸', 'その他'];
 const AGES = ['築5年未満', '築5〜10年', '築10〜20年', '築20〜30年', '築30年以上'];
 const UNITS = ['1〜5戸', '6〜10戸', '11〜20戸', '21〜50戸', '51戸以上'];
+// 築年数・戸数の点数（上の並び順に対応）
+const AGE_POINTS = [0, 3, 6, 10, 12];
+const UNIT_POINTS = [2, 4, 6, 8, 10];
 const AREAS = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都23区','東京都下','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
 
 const FLOW = [
@@ -141,17 +145,22 @@ function renderResult() {
   const manage = MANAGES.find(m => m.id === state.manage);
   const picked = state.concerns.filter(id => id !== 'other');
 
-  // 改善可能性：お悩みの数 × 12 ＋ 管理状況の点数 ＋ 25（30〜95で丸める）
-  const score = Math.min(95, Math.max(30, state.concerns.length * 12 + manage.point + 25));
-  const stars = Math.round(score / 20);
+  // 改善可能性 ＝ 基本点20 ＋ お悩み点 ＋ 管理状況点 ＋ 築年数点 ＋ 戸数点（30〜95にそろえる）
+  const concernPoint = state.concerns.reduce((sum, id) =>
+    sum + (id === 'other' ? OTHER_POINT : CONCERNS.find(x => x.id === id).point), 0);
+  const agePoint = AGE_POINTS[AGES.indexOf(state.age)];
+  const unitPoint = UNIT_POINTS[UNITS.indexOf(state.units)];
+  const score = Math.min(95, Math.max(30, 20 + concernPoint + manage.point + agePoint + unitPoint));
+  // 星：30〜44=1 / 45〜59=2 / 60〜74=3 / 75〜89=4 / 90〜95=5
+  const stars = score >= 90 ? 5 : score >= 75 ? 4 : score >= 60 ? 3 : score >= 45 ? 2 : 1;
 
   const lead = state.manage === 'jishu' ? '管理のプロへの委託で、' : '管理会社の変更で、';
   const tail = score >= 50 ? '改善できる可能性が高いです。' : '改善できる可能性があります。';
   document.getElementById('resTitle').innerHTML = `<em>${lead}</em><br>${tail}`;
-  document.getElementById('resScore').textContent = score;
+  document.getElementById('resScore').textContent = 0;
 
   const star = on => `<svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="${on ? 'var(--star)' : 'none'}" stroke="${on ? 'var(--star)' : '#cfd5df'}" stroke-width="1.3"/></svg>`;
-  document.getElementById('resStars').innerHTML = [1, 2, 3, 4, 5].map(i => star(i <= stars)).join('');
+  document.getElementById('resStars').innerHTML = [1, 2, 3, 4, 5].map(() => star(false)).join('');
 
   document.getElementById('resSummary').textContent =
     `${state.area}の${state.type}（${state.age}・${state.units}）、${manage.label}の物件として診断しました。`;
@@ -181,6 +190,58 @@ function renderResult() {
     id === 'other' ? (state.other ? `その他（${escapeHtml(state.other)}）` : 'その他') : CONCERNS.find(x => x.id === id).label
   ).join('、');
   document.getElementById('resFoot').innerHTML = `お悩み：<b>${concernText}</b>管理状況：<b>${manage.label}</b>`;
+
+  playResultAnimation(score, stars);
+}
+
+// ---------- 結果画面の演出 ----------
+let animTimers = [];
+let animFrame = null;
+function playResultAnimation(score, stars) {
+  animTimers.forEach(clearTimeout);
+  animTimers = [];
+  cancelAnimationFrame(animFrame);
+
+  const scoreEl = document.getElementById('resScore');
+  const starEls = document.querySelectorAll('#resStars svg');
+  const items = document.querySelectorAll('#resSolve .solve-item');
+  const lightStar = el => {
+    const path = el.querySelector('path');
+    path.setAttribute('fill', 'var(--star)');
+    path.setAttribute('stroke', 'var(--star)');
+    el.classList.add('pop');
+  };
+
+  // 動きを控える設定の場合は、演出なしで最終の状態を表示
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    scoreEl.textContent = score;
+    for (let i = 0; i < stars; i++) lightStar(starEls[i]);
+    return;
+  }
+
+  items.forEach(el => el.classList.add('wait'));
+
+  // 1. 数字のカウントアップ（約1.2秒、終わりに向けてゆっくり）
+  const duration = 1200;
+  const start = performance.now();
+  const tick = now => {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    scoreEl.textContent = Math.round(score * eased);
+    if (t < 1) animFrame = requestAnimationFrame(tick);
+  };
+  animFrame = requestAnimationFrame(tick);
+
+  // 2. 星を左から1つずつ点灯（約0.15秒ずつ）
+  for (let i = 0; i < stars; i++) {
+    animTimers.push(setTimeout(() => lightStar(starEls[i]), duration + i * 150));
+  }
+
+  // 3. 解決策を上から順に表示
+  const itemsStart = duration + stars * 150 + 100;
+  items.forEach((el, i) => {
+    animTimers.push(setTimeout(() => el.classList.remove('wait'), itemsStart + i * 120));
+  });
 }
 
 function escapeHtml(s) {

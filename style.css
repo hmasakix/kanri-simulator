@@ -265,3 +265,9 @@ select:focus { outline: none; border-color: var(--navy); }
   background: var(--gray); border-radius: 2px; overflow: hidden;
 }
 .scroll-guide .thumb { position: absolute; top: 0; left: 0; height: 100%; background: var(--navy); border-radius: 2px; }
+
+/* 結果画面の演出 */
+.stars svg.pop { animation: starPop .35s ease-out; }
+@keyframes starPop { 0% { transform: scale(.4); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
+.solve-item { transition: opacity .35s ease, transform .35s ease; }
+.solve-item.wait { opacity: 0; transform: translateY(8px); }
