@@ -271,3 +271,30 @@ select:focus { outline: none; border-color: var(--navy); }
 @keyframes starPop { 0% { transform: scale(.4); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
 .solve-item { transition: opacity .35s ease, transform .35s ease; }
 .solve-item.wait { opacity: 0; transform: translateY(8px); }
+
+/* P7「無料相談を申し込む」を目立たせる（PC・スマホ共通） */
+.btn-orange {
+  height: 66px; font-size: 19px; letter-spacing: .04em; overflow: hidden;
+  box-shadow: 0 8px 20px rgba(242, 113, 28, .35);
+  animation: ctaPulse 2.4s ease-in-out infinite;
+  transition: background .15s, transform .15s, box-shadow .15s;
+}
+/* 光が左から右へ走る */
+.btn-orange::before {
+  content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .45), transparent);
+  transform: skewX(-20deg); animation: ctaShine 3s ease-in-out infinite;
+}
+/* 矢印が右へ動く */
+.btn-orange .arrow { animation: ctaArrow 1.2s ease-in-out infinite; }
+.btn-orange:hover { box-shadow: 0 12px 26px rgba(242, 113, 28, .45); }
+.btn-orange:active { transform: scale(.97); animation: none; }
+
+@keyframes ctaPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+@keyframes ctaShine { 0% { left: -60%; } 60%, 100% { left: 130%; } }
+@keyframes ctaArrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+
+/* 動きを控える設定の場合は止める */
+@media (prefers-reduced-motion: reduce) {
+  .btn-orange, .btn-orange::before, .btn-orange .arrow { animation: none; }
+}
