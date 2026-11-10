@@ -79,7 +79,7 @@ document.querySelectorAll('.steps').forEach(el => {
     html += `<span class="dot ${i <= cur ? 'on' : ''}">${i}</span>`;
     html += `<span class="bar ${i < cur ? 'on' : ''}"></span>`;
   }
-  html += '<span class="end">結果</span>';
+  html += `<span class="end ${cur >= 4 ? 'on' : ''}">結果</span>`; // 結果画面では紺色で強調
   el.innerHTML = html;
 });
 
@@ -138,7 +138,11 @@ fillSelect('area', AREAS);
 function checkP4() {
   document.getElementById('toP5').disabled = !(state.type && state.age && state.units && state.area);
 }
-document.getElementById('toP5').addEventListener('click', () => { renderResult(); go('p5'); });
+// 「結果を見る」→「診断中…」を約1.2秒表示してから結果へ
+document.getElementById('toP5').addEventListener('click', () => {
+  go('loading');
+  setTimeout(() => { renderResult(); go('p5'); }, 1200);
+});
 
 // ---------- P5 結果 ----------
 function renderResult() {

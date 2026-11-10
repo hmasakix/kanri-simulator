@@ -6,7 +6,7 @@
 <title>管理会社変更シミュレーター</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261111-7">
+<link rel="stylesheet" href="style.css?v=20261111-8">
 </head>
 <body>
 <div class="wrap">
@@ -17,7 +17,7 @@
 
   <!-- ===== P1 TOP ===== -->
   <section class="screen active" id="p1">
-    <div class="card narrow" style="max-width:720px">
+    <div class="card narrow">
       <div class="top">
         <svg class="top-illust" viewBox="0 0 220 220" aria-hidden="true">
           <rect x="18" y="40" width="70" height="160" fill="#c9d3e6"/>
@@ -164,7 +164,7 @@
         <!-- アクション：前ページ（P4）へ -->
         <button class="btn btn-ghost" data-go="p4">戻る</button>
         <!-- アクション：最初（TOP）へ -->
-        <button class="btn btn-ghost" style="flex:2" id="restart">最初からやり直す</button>
+        <button class="btn btn-ghost" id="restart">最初からやり直す</button>
       </div>
     </div>
   </section>
@@ -180,7 +180,7 @@
         <span><em>最短<b>3〜4</b>週間</em>で管理会社の変更が完了します！</span>
       </div>
       <p class="flow-note">※スケジュールは物件の状況や現管理会社の対応により異なります。<br>※入居者様へのご案内や各種手続きはすべてIFCが対応します。</p>
-      <div class="btn-row" style="max-width:640px;margin-left:auto;margin-right:auto">
+      <div class="btn-row">
         <button class="btn btn-ghost" data-go="p5">結果に戻る</button>
         <button class="btn btn-primary" data-go="p7">無料で相談する<span class="arrow">›</span></button>
       </div>
@@ -189,7 +189,7 @@
 
   <!-- ===== P7 CTA ===== -->
   <section class="screen" id="p7">
-    <div class="card narrow" style="max-width:620px">
+    <div class="card narrow">
       <p class="cta-title">まずは<em>無料相談</em>から<br class="sp-only">はじめませんか？</p>
       <p class="cta-sub">オーナー様の状況に合わせて、<br class="sp-only">最適なプランをご提案します。</p>
       <div class="can">
@@ -236,6 +236,6 @@
 
 <div class="mock-toast" id="toast"></div>
 
-<script src="script.js?v=20261111-7"></script>
+<script src="script.js?v=20261111-8"></script>
 </body>
 </html>
