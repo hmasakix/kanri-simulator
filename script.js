@@ -157,6 +157,7 @@ function renderResult() {
   const lead = state.manage === 'jishu' ? '管理のプロへの委託で、' : '管理会社の変更で、';
   const tail = score >= 50 ? '改善できる<br class="sp-only">可能性が高いです。' : '改善できる<br class="sp-only">可能性があります。';
   document.getElementById('resTitle').innerHTML = `<em>${lead}</em><br>${tail}`;
+  document.getElementById('resTitle').classList.toggle('long', state.manage === 'jishu');
   document.getElementById('resScore').textContent = 0;
 
   const star = on => `<svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="${on ? 'var(--star)' : 'none'}" stroke="${on ? 'var(--star)' : '#cfd5df'}" stroke-width="1.3"/></svg>`;
