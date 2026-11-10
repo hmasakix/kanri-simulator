@@ -1,3 +1,10 @@
+/* =========================================================
+   管理会社変更シミュレーター　スタイル
+   ・PC／スマホ共通の指定を先に書き、スマホだけの指定は
+     いちばん下の「スマホ（560px以下）」にまとめています。
+   ========================================================= */
+
+/* ---------- 色の設定 ---------- */
 :root {
   --navy: #0b3d91;
   --navy-dark: #082d6b;
@@ -8,12 +15,16 @@
   --line: #dde1e8;
   --gray: #d5d9e1;
   --star: #f5b335;
+  --score: #e60012;   /* スコアの数字（金赤） */
   --yellow: #fdf5dc;
   --beige: #fdf3e3;
   --orange: #f2711c;
   --orange-dark: #d95f10;
 }
+
+/* ---------- 全体 ---------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; } /* iPhoneで文字が勝手に大きくならないように */
 body {
   font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
   background: var(--bg);
@@ -34,11 +45,16 @@ button { font-family: inherit; cursor: pointer; }
   padding: 28px;
 }
 .card.narrow { max-width: 560px; margin-left: auto; margin-right: auto; }
+
+/* 画面の切り替え */
 .screen { display: none; }
 .screen.active { display: block; animation: fade .25s ease; }
 @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-/* ステップ表示 */
+/* スマホだけで改行する（PCでは非表示） */
+.sp-only { display: none; }
+
+/* ---------- ステップ表示 ---------- */
 .steps { display: flex; align-items: center; margin-bottom: 26px; }
 .steps .dot {
   width: 28px; height: 28px; border-radius: 50%;
@@ -51,11 +67,12 @@ button { font-family: inherit; cursor: pointer; }
 .steps .bar.on { background: var(--navy); }
 .steps .end { font-size: 13px; font-weight: 700; color: var(--sub); flex-shrink: 0; }
 
+/* ---------- 質問の見出し（P2〜P4） ---------- */
 h2.q { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
 h2.q small { font-size: 12px; font-weight: 500; color: var(--sub); margin-left: 4px; }
 .q-sub { font-size: 13px; color: var(--sub); margin-bottom: 18px; }
 
-/* 選択肢 */
+/* ---------- 選択肢（チェック・ラジオ） ---------- */
 .opt {
   display: flex; align-items: center; gap: 14px;
   border: 1px solid var(--line); border-radius: 6px;
@@ -87,7 +104,7 @@ h2.q small { font-size: 12px; font-weight: 500; color: var(--sub); margin-left: 
 }
 .opt .other-input:focus { outline: none; border-color: var(--navy); }
 
-/* 物件情報 */
+/* ---------- 物件情報（P4） ---------- */
 .field { margin-bottom: 18px; }
 .field-label { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
 .types { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
@@ -104,7 +121,7 @@ select {
 }
 select:focus { outline: none; border-color: var(--navy); }
 
-/* ボタン */
+/* ---------- ボタン ---------- */
 .btn-row { display: flex; gap: 12px; margin-top: 24px; }
 .btn {
   height: 52px; border-radius: 4px; font-size: 15px; font-weight: 700;
@@ -118,10 +135,28 @@ select:focus { outline: none; border-color: var(--navy); }
 .btn-ghost { background: #fff; color: var(--text); border-color: var(--line); flex: 1; }
 .btn-ghost:hover { background: #f7f8fa; }
 .btn-full { width: 100%; }
-.btn-orange { background: var(--orange); color: #fff; width: 100%; height: 58px; font-size: 17px; border-radius: 6px; }
-.btn-orange:hover { background: var(--orange-dark); }
 
-/* TOP */
+/* P7「無料相談を申し込む」（目立たせる＋常に動く） */
+.btn-orange {
+  background: var(--orange); color: #fff; width: 100%;
+  height: 66px; font-size: 19px; letter-spacing: .04em; border-radius: 6px; overflow: hidden;
+  box-shadow: 0 8px 20px rgba(242, 113, 28, .35);
+  animation: ctaPulse 2.4s ease-in-out infinite;                /* ゆっくり大きくなったり戻ったり */
+  transition: background .15s, transform .15s, box-shadow .15s;
+}
+.btn-orange::before {                                            /* 光が左から右へ走る */
+  content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .45), transparent);
+  transform: skewX(-20deg); animation: ctaShine 3s ease-in-out infinite;
+}
+.btn-orange .arrow { animation: ctaArrow 1.2s ease-in-out infinite; } /* 矢印が右へ動く */
+.btn-orange:hover { background: var(--orange-dark); box-shadow: 0 12px 26px rgba(242, 113, 28, .45); }
+.btn-orange:active { transform: scale(.97); animation: none; }
+@keyframes ctaPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+@keyframes ctaShine { 0% { left: -60%; } 60%, 100% { left: 130%; } }
+@keyframes ctaArrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+
+/* ---------- P1 TOP ---------- */
 .top { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: center; margin-bottom: 26px; }
 .top-illust { width: 100%; }
 .top .catch { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
@@ -133,37 +168,54 @@ select:focus { outline: none; border-color: var(--navy); }
 .feature .d { font-size: 12px; color: var(--sub); }
 .note { font-size: 12px; color: var(--sub); text-align: center; margin-top: 12px; }
 
-/* 結果 */
+/* ---------- P5 結果 ---------- */
 .result { display: grid; grid-template-columns: 1fr 382px; gap: 24px; }
+.result > div { min-width: 0; }
 .badge { display: inline-block; background: var(--navy-light); color: var(--navy); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 3px; margin-bottom: 14px; }
+
+/* 見出し＋スコアの丸 */
 .res-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.res-head > div:first-child { flex: 1; min-width: 0; }   /* 丸がカードからはみ出さないように */
 .res-head h2 { font-size: 23px; line-height: 1.5; font-weight: 700; }
 .res-head h2 em { font-style: normal; color: var(--navy); }
 .score {
   width: 118px; height: 118px; border-radius: 50%; background: var(--navy-light);
   display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.score b { font-size: 63px; color: #e60012; line-height: 1; }
+.score b { font-size: 63px; color: var(--score); line-height: 1; }
 .score span { font-size: 10px; color: var(--navy); font-weight: 700; }
+
+/* 星（演出で1つずつ点灯） */
 .stars { display: flex; gap: 4px; margin: 6px 0 20px; }
 .stars svg { width: 30px; height: 30px; }
+.stars svg.pop { animation: starPop .35s ease-out; }
+@keyframes starPop { 0% { transform: scale(.4); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
+
 .res-summary { font-size: 13px; color: var(--sub); margin-bottom: 16px; }
+
+/* 解決策の一覧（演出で上から順に表示） */
 .solve { background: var(--bg); border-radius: 8px; padding: 20px; }
 .solve h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; }
 .solve-item {
   display: flex; gap: 12px; align-items: center;
   background: #fff; border: 1px solid var(--line); border-radius: 4px;
   padding: 12px 16px; margin-bottom: 8px; font-size: 14px;
+  transition: opacity .35s ease, transform .35s ease;
 }
 .solve-item:last-child { margin-bottom: 0; }
 .solve-item.hit { border-color: var(--navy); }
+.solve-item.wait { opacity: 0; transform: translateY(8px); }
 .solve-item .lbl { display: block; font-size: 12px; font-weight: 700; color: var(--navy); }
 .check { width: 20px; height: 20px; flex-shrink: 0; }
+
+/* IFCがご提供できること */
 .offer { background: var(--navy-light); border-radius: 8px; padding: 24px; margin-bottom: 20px; }
 .offer h3 { text-align: center; color: var(--navy); font-size: 17px; margin-bottom: 14px; }
 .offer li { list-style: none; display: flex; align-items: center; gap: 14px; padding: 13px 4px; border-bottom: 1px solid #ccd6ea; font-size: 14px; font-weight: 500; }
 .offer li:last-child { border-bottom: none; }
 .offer svg { width: 24px; height: 24px; color: var(--navy); flex-shrink: 0; }
+
+/* 黄色枠（P6へのリンク） */
 .support-link {
   display: block; width: 100%; background: var(--yellow); border: 1px solid transparent; border-radius: 8px;
   padding: 28px 16px 22px; text-align: center; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 20px;
@@ -172,10 +224,11 @@ select:focus { outline: none; border-color: var(--navy); }
 .support-link:hover { border-color: #e2c46a; transform: translateY(-4px); box-shadow: 0 10px 22px rgba(160, 120, 20, .18); }
 .support-link svg { width: 56px; height: 36px; margin-top: 10px; }
 .support-link .more { display: block; font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--navy); margin-top: 6px; text-decoration: underline; }
+
 .res-foot { border-top: 1px dashed var(--line); margin-top: 24px; padding-top: 16px; font-size: 12px; color: var(--sub); }
 .res-foot b { color: var(--text); font-weight: 700; margin-right: 16px; }
 
-/* P6 流れ */
+/* ---------- P6 管理会社変更の流れ ---------- */
 .flow-title { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
 .flow-title em { font-style: normal; color: var(--navy); }
 .flow-sub { text-align: center; font-size: 13px; color: var(--sub); margin-bottom: 24px; }
@@ -195,6 +248,22 @@ select:focus { outline: none; border-color: var(--navy); }
   display: flex; align-items: center; justify-content: center; padding: 12px 4px; line-height: 1.5; min-height: 68px;
 }
 .flow .ifc { background: #f5f7fc; }
+
+/* 横スクロールのガイド（表がはみ出すときだけ表示） */
+.scroll-guide { display: none; margin-top: 12px; }
+.scroll-guide.show { display: block; }
+.scroll-guide .hint {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 12px; font-weight: 500; color: var(--sub);
+}
+.scroll-guide .hint svg { width: 20px; height: 20px; color: var(--navy); animation: swipe 1.4s ease-in-out infinite; }
+@keyframes swipe { 0%, 100% { transform: translateX(-4px); } 50% { transform: translateX(4px); } }
+.scroll-guide .track {
+  position: relative; height: 4px; max-width: 220px; margin: 8px auto 0;
+  background: var(--gray); border-radius: 2px; overflow: hidden;
+}
+.scroll-guide .thumb { position: absolute; top: 0; left: 0; height: 100%; background: var(--navy); border-radius: 2px; }
+
 .period {
   margin: 24px auto 14px; max-width: 640px; background: #fff8e6; border: 1px solid #f3dca1; border-radius: 6px;
   padding: 16px; display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 17px; font-weight: 700;
@@ -204,7 +273,7 @@ select:focus { outline: none; border-color: var(--navy); }
 .period em b { font-size: 30px; margin: 0 2px; }
 .flow-note { font-size: 12px; color: var(--sub); max-width: 640px; margin: 0 auto; }
 
-/* P7 CTA */
+/* ---------- P7 CTA ---------- */
 .cta-title { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
 .cta-title em { font-style: normal; color: var(--navy); }
 .cta-sub { text-align: center; font-size: 13px; color: var(--sub); margin-bottom: 22px; }
@@ -227,6 +296,7 @@ select:focus { outline: none; border-color: var(--navy); }
 .tel-box a svg { width: 26px; height: 26px; color: var(--navy); }
 .tel-box small { display: block; font-size: 12px; color: var(--sub); }
 
+/* モック用のお知らせ表示 */
 .mock-toast {
   position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
   background: rgba(31, 38, 51, .92); color: #fff; font-size: 13px; padding: 10px 18px; border-radius: 6px;
@@ -234,105 +304,59 @@ select:focus { outline: none; border-color: var(--navy); }
 }
 .mock-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+/* =========================================================
+   タブレット（820px以下）
+   ========================================================= */
 @media (max-width: 820px) {
   .result { grid-template-columns: 1fr; }
   .top { grid-template-columns: 1fr; text-align: center; }
   .top-illust { max-width: 200px; margin: 0 auto; }
   .flow { grid-template-columns: 80px repeat(6, 110px); }
 }
+
+/* =========================================================
+   スマホ（560px以下）
+   ========================================================= */
 @media (max-width: 560px) {
   .card { padding: 20px 16px; }
-  .types { grid-template-columns: repeat(2, 1fr); }
-  .features { grid-template-columns: 1fr; }
-  .can { grid-template-columns: 1fr; }
-  .can svg { display: none; }
-  .sub-btns { grid-template-columns: 1fr; }
-  .res-head h2 { font-size: 19px; }
+  .sp-only { display: inline; }
+
+  /* P1 TOP */
   .top h1 { font-size: 26px; }
-}
-
-/* P6 横スクロールのガイド（はみ出すときだけ表示） */
-.scroll-guide { display: none; margin-top: 12px; }
-.scroll-guide.show { display: block; }
-.scroll-guide .hint {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  font-size: 12px; font-weight: 500; color: var(--sub);
-}
-.scroll-guide .hint svg { width: 20px; height: 20px; color: var(--navy); animation: swipe 1.4s ease-in-out infinite; }
-@keyframes swipe { 0%, 100% { transform: translateX(-4px); } 50% { transform: translateX(4px); } }
-.scroll-guide .track {
-  position: relative; height: 4px; max-width: 220px; margin: 8px auto 0;
-  background: var(--gray); border-radius: 2px; overflow: hidden;
-}
-.scroll-guide .thumb { position: absolute; top: 0; left: 0; height: 100%; background: var(--navy); border-radius: 2px; }
-
-/* 結果画面の演出 */
-.stars svg.pop { animation: starPop .35s ease-out; }
-@keyframes starPop { 0% { transform: scale(.4); } 70% { transform: scale(1.2); } 100% { transform: scale(1); } }
-.solve-item { transition: opacity .35s ease, transform .35s ease; }
-.solve-item.wait { opacity: 0; transform: translateY(8px); }
-
-/* P7「無料相談を申し込む」を目立たせる（PC・スマホ共通） */
-.btn-orange {
-  height: 66px; font-size: 19px; letter-spacing: .04em; overflow: hidden;
-  box-shadow: 0 8px 20px rgba(242, 113, 28, .35);
-  animation: ctaPulse 2.4s ease-in-out infinite;
-  transition: background .15s, transform .15s, box-shadow .15s;
-}
-/* 光が左から右へ走る */
-.btn-orange::before {
-  content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .45), transparent);
-  transform: skewX(-20deg); animation: ctaShine 3s ease-in-out infinite;
-}
-/* 矢印が右へ動く */
-.btn-orange .arrow { animation: ctaArrow 1.2s ease-in-out infinite; }
-.btn-orange:hover { box-shadow: 0 12px 26px rgba(242, 113, 28, .45); }
-.btn-orange:active { transform: scale(.97); animation: none; }
-
-@keyframes ctaPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
-@keyframes ctaShine { 0% { left: -60%; } 60%, 100% { left: 130%; } }
-@keyframes ctaArrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
-
-/* 動きを控える設定の場合は止める */
-@media (prefers-reduced-motion: reduce) {
-  .btn-orange, .btn-orange::before, .btn-orange .arrow { animation: none; }
-}
-
-/* スコアの丸がカードからはみ出さないように（特にiPhone） */
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-.result > div { min-width: 0; }
-.res-head > div:first-child { flex: 1; min-width: 0; }
-@media (max-width: 560px) {
-  .res-head { gap: 10px; }
-  .score { margin-right: 6px; }
-}
-
-/* スマホだけで改行する */
-.sp-only { display: none; }
-@media (max-width: 560px) { .sp-only { display: inline; } }
-
-/* スマホ：TOPのキャッチ「管理会社の変更って、実はカンタンです。」を1行に収める */
-@media (max-width: 560px) {
+  .features { grid-template-columns: 1fr; }
   .top > div:last-child { container-type: inline-size; }
-  .top .catch {
+  .top .catch {                                       /* 「管理会社の変更って、実はカンタンです。」を1行に収める */
     white-space: nowrap;
     font-size: min(14px, calc((100vw - 80px) / 19.5)); /* 古い端末向け */
     font-size: min(14px, calc(100cqw / 19.5));          /* 枠の幅に合わせて縮める */
   }
-}
 
-/* スマホ：結果の見出しを3行（管理会社の変更で、／改善できる／可能性が高いです。）に収める */
-@media (max-width: 560px) {
+  /* P4 物件情報 */
+  .types { grid-template-columns: repeat(2, 1fr); }
+
+  /* P5 結果：見出しを3行（管理会社の変更で／改善できる／可能性が高いです）に収める */
+  .res-head { gap: 10px; }
   .res-head > div:first-child { container-type: inline-size; }
   .res-head h2 {
     white-space: nowrap;
     font-size: min(24px, calc((100vw - 200px) / 8.2)); /* 古い端末向け */
     font-size: min(24px, calc(100cqw / 8.2));          /* 1行8文字が幅いっぱいに収まる大きさ */
   }
-  /* 「管理のプロへの委託で」（10文字）のときだけ少し小さく */
-  .res-head h2.long {
+  .res-head h2.long {                                  /* 「管理のプロへの委託で」（10文字）のときだけ少し小さく */
     font-size: min(24px, calc((100vw - 200px) / 10.2));
     font-size: min(24px, calc(100cqw / 10.2));
   }
+  .score { margin-right: 6px; }
+
+  /* P7 CTA */
+  .can { grid-template-columns: 1fr; }
+  .can svg { display: none; }
+  .sub-btns { grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   動きを控える設定の場合は止める
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .btn-orange, .btn-orange::before, .btn-orange .arrow { animation: none; }
 }
