@@ -154,8 +154,8 @@ function renderResult() {
   // 星：30〜44=1 / 45〜59=2 / 60〜74=3 / 75〜89=4 / 90〜95=5
   const stars = score >= 90 ? 5 : score >= 75 ? 4 : score >= 60 ? 3 : score >= 45 ? 2 : 1;
 
-  const lead = state.manage === 'jishu' ? '管理のプロへの委託で、' : '管理会社の変更で、';
-  const tail = score >= 50 ? '改善できる<br class="sp-only">可能性が高いです。' : '改善できる<br class="sp-only">可能性があります。';
+  const lead = state.manage === 'jishu' ? '管理のプロへの委託で' : '管理会社の変更で';
+  const tail = score >= 50 ? '改善できる<br class="sp-only">可能性が高いです' : '改善できる<br class="sp-only">可能性があります';
   document.getElementById('resTitle').innerHTML = `<em>${lead}</em><br>${tail}`;
   document.getElementById('resTitle').classList.toggle('long', state.manage === 'jishu');
   document.getElementById('resScore').textContent = 0;

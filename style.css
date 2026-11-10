@@ -327,12 +327,12 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .res-head > div:first-child { container-type: inline-size; }
   .res-head h2 {
     white-space: nowrap;
-    font-size: min(22px, calc((100vw - 200px) / 9.3)); /* 古い端末向け */
-    font-size: min(22px, calc(100cqw / 9.3));          /* 1行9文字が幅いっぱいに収まる大きさ */
+    font-size: min(24px, calc((100vw - 200px) / 8.2)); /* 古い端末向け */
+    font-size: min(24px, calc(100cqw / 8.2));          /* 1行8文字が幅いっぱいに収まる大きさ */
   }
-  /* 「管理のプロへの委託で、」（11文字）のときだけ少し小さく */
+  /* 「管理のプロへの委託で」（10文字）のときだけ少し小さく */
   .res-head h2.long {
-    font-size: min(22px, calc((100vw - 200px) / 11.2));
-    font-size: min(22px, calc(100cqw / 11.2));
+    font-size: min(24px, calc((100vw - 200px) / 10.2));
+    font-size: min(24px, calc(100cqw / 10.2));
   }
 }
