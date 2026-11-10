@@ -143,7 +143,7 @@ select:focus { outline: none; border-color: var(--navy); }
   width: 118px; height: 118px; border-radius: 50%; background: var(--navy-light);
   display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.score b { font-size: 63px; color: #f29a1c; line-height: 1; }
+.score b { font-size: 63px; color: #e60012; line-height: 1; }
 .score span { font-size: 10px; color: var(--navy); font-weight: 700; }
 .stars { display: flex; gap: 4px; margin: 6px 0 20px; }
 .stars svg { width: 30px; height: 30px; }
@@ -297,4 +297,13 @@ select:focus { outline: none; border-color: var(--navy); }
 /* 動きを控える設定の場合は止める */
 @media (prefers-reduced-motion: reduce) {
   .btn-orange, .btn-orange::before, .btn-orange .arrow { animation: none; }
+}
+
+/* スコアの丸がカードからはみ出さないように（特にiPhone） */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+.result > div { min-width: 0; }
+.res-head > div:first-child { flex: 1; min-width: 0; }
+@media (max-width: 560px) {
+  .res-head { gap: 10px; }
+  .score { margin-right: 6px; }
 }
