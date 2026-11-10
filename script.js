@@ -50,6 +50,7 @@ const state = { concerns: [], other: '', manage: '', type: '', age: '', units: '
 function go(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (id === 'p6') requestAnimationFrame(updateFlowGuide);
 }
 document.addEventListener('click', e => {
   const btn = e.target.closest('[data-go]');
@@ -206,3 +207,27 @@ document.getElementById('flowTable').innerHTML =
   FLOW.map(f => `<div class="cell">${f.owner}</div>`).join('') +
   '<div class="row-label">IFCが<br>サポート<br>すること</div>' +
   FLOW.map(f => `<div class="cell ifc">${f.ifc}</div>`).join('');
+
+// ---------- P6 横スクロールのガイド ----------
+const flowTable = document.getElementById('flowTable');
+flowTable.insertAdjacentHTML('afterend', `
+  <div class="scroll-guide" id="flowGuide">
+    <p class="hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 013 0V11m0-1.5a1.5 1.5 0 013 0V11m0-.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1a6 6 0 01-4.6-2.2L4 15.5a1.5 1.5 0 012.3-1.9L9 16"/></svg>
+      横にスクロールできます
+    </p>
+    <div class="track"><div class="thumb" id="flowThumb"></div></div>
+  </div>`);
+
+function updateFlowGuide() {
+  const guide = document.getElementById('flowGuide');
+  const thumb = document.getElementById('flowThumb');
+  const max = flowTable.scrollWidth - flowTable.clientWidth;
+  guide.classList.toggle('show', max > 2);
+  if (max <= 2) return;
+  const ratio = flowTable.clientWidth / flowTable.scrollWidth;
+  thumb.style.width = (ratio * 100) + '%';
+  thumb.style.left = (flowTable.scrollLeft / max) * (1 - ratio) * 100 + '%';
+}
+flowTable.addEventListener('scroll', updateFlowGuide, { passive: true });
+window.addEventListener('resize', updateFlowGuide);

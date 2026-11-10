@@ -250,3 +250,18 @@ select:focus { outline: none; border-color: var(--navy); }
   .res-head h2 { font-size: 19px; }
   .top h1 { font-size: 26px; }
 }
+
+/* P6 横スクロールのガイド（はみ出すときだけ表示） */
+.scroll-guide { display: none; margin-top: 12px; }
+.scroll-guide.show { display: block; }
+.scroll-guide .hint {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 12px; font-weight: 500; color: var(--sub);
+}
+.scroll-guide .hint svg { width: 20px; height: 20px; color: var(--navy); animation: swipe 1.4s ease-in-out infinite; }
+@keyframes swipe { 0%, 100% { transform: translateX(-4px); } 50% { transform: translateX(4px); } }
+.scroll-guide .track {
+  position: relative; height: 4px; max-width: 220px; margin: 8px auto 0;
+  background: var(--gray); border-radius: 2px; overflow: hidden;
+}
+.scroll-guide .thumb { position: absolute; top: 0; left: 0; height: 100%; background: var(--navy); border-radius: 2px; }
