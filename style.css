@@ -307,3 +307,17 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .res-head { gap: 10px; }
   .score { margin-right: 6px; }
 }
+
+/* スマホだけで改行する */
+.sp-only { display: none; }
+@media (max-width: 560px) { .sp-only { display: inline; } }
+
+/* スマホ：TOPのキャッチ「管理会社の変更って、実はカンタンです。」を1行に収める */
+@media (max-width: 560px) {
+  .top > div:last-child { container-type: inline-size; }
+  .top .catch {
+    white-space: nowrap;
+    font-size: min(14px, calc((100vw - 80px) / 19.5)); /* 古い端末向け */
+    font-size: min(14px, calc(100cqw / 19.5));          /* 枠の幅に合わせて縮める */
+  }
+}
