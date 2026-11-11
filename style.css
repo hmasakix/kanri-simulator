@@ -164,6 +164,22 @@ select:focus { outline: none; border-color: var(--navy); }
 @keyframes ctaShine { 0% { left: -60%; } 60%, 100% { left: 130%; } }
 @keyframes ctaArrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
 
+/* P1「シミュレーションをはじめる」：「無料相談を申し込む」と同じ動き（PC・スマホ共通） */
+.btn-start {
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(11, 61, 145, .3);
+  animation: ctaPulse 2.4s ease-in-out infinite;
+  transition: background .15s, transform .15s, box-shadow .15s;
+}
+.btn-start::before {
+  content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .35), transparent);
+  transform: skewX(-20deg); animation: ctaShine 3s ease-in-out infinite;
+}
+.btn-start .arrow { animation: ctaArrow 1.2s ease-in-out infinite; }
+.btn-start:hover { box-shadow: 0 12px 26px rgba(11, 61, 145, .4); }
+.btn-start:active { transform: scale(.97); animation: none; }
+
 /* ---------- P1 TOP ---------- */
 .top { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: center; margin-bottom: 26px; }
 .top-illust { width: 100%; }
@@ -386,5 +402,6 @@ select:focus { outline: none; border-color: var(--navy); }
    動きを控える設定の場合は止める
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
-  .btn-orange, .btn-orange::before, .btn-orange .arrow { animation: none; }
+  .btn-orange, .btn-orange::before, .btn-orange .arrow,
+  .btn-start, .btn-start::before, .btn-start .arrow { animation: none; }
 }
