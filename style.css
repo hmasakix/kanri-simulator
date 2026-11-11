@@ -164,21 +164,23 @@ select:focus { outline: none; border-color: var(--navy); }
 @keyframes ctaShine { 0% { left: -60%; } 60%, 100% { left: 130%; } }
 @keyframes ctaArrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
 
-/* P1「シミュレーションをはじめる」：「無料相談を申し込む」と同じ動き（PC・スマホ共通） */
-.btn-start {
+/* 紺色の動くボタン（PC・スマホ共通）
+   ・P1「シミュレーションをはじめる」
+   ・P5／P6「無料で相談する」（P7へ進むだけなので、フォームへ進むオレンジとは色を分ける） */
+.btn-start, .btn-move {
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(11, 61, 145, .3);
   animation: ctaPulse 2.4s ease-in-out infinite;
   transition: background .15s, transform .15s, box-shadow .15s;
 }
-.btn-start::before {
+.btn-start::before, .btn-move::before {
   content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
   background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .35), transparent);
   transform: skewX(-20deg); animation: ctaShine 3s ease-in-out infinite;
 }
-.btn-start .arrow { animation: ctaArrow 1.2s ease-in-out infinite; }
-.btn-start:hover { box-shadow: 0 12px 26px rgba(11, 61, 145, .4); }
-.btn-start:active { transform: scale(.97); animation: none; }
+.btn-start .arrow, .btn-move .arrow { animation: ctaArrow 1.2s ease-in-out infinite; }
+.btn-start:hover, .btn-move:hover { box-shadow: 0 12px 26px rgba(11, 61, 145, .4); }
+.btn-start:active, .btn-move:active { transform: scale(.97); animation: none; }
 
 /* ---------- P1 TOP ---------- */
 .top { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: center; margin-bottom: 26px; }
@@ -314,7 +316,6 @@ select:focus { outline: none; border-color: var(--navy); }
 .period em b { font-size: 30px; margin: 0 2px; }
 .flow-note { font-size: 12px; color: var(--sub); max-width: 640px; margin: 0 auto; }
 #p6 .btn-row { max-width: 640px; margin-left: auto; margin-right: auto; align-items: center; }
-#p6 .btn-row .btn-orange { flex: 2; width: auto; }   /* 「結果に戻る」と横に並べる */
 
 /* ---------- P7 CTA ---------- */
 .cta-title { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
@@ -405,5 +406,6 @@ select:focus { outline: none; border-color: var(--navy); }
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
   .btn-orange, .btn-orange::before, .btn-orange .arrow,
-  .btn-start, .btn-start::before, .btn-start .arrow { animation: none; }
+  .btn-start, .btn-start::before, .btn-start .arrow,
+  .btn-move, .btn-move::before, .btn-move .arrow { animation: none; }
 }
