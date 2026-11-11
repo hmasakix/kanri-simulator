@@ -6,7 +6,7 @@
 <title>管理会社変更シミュレーター</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261111-11">
+<link rel="stylesheet" href="style.css?v=20261111-12">
 </head>
 <body>
 <div class="wrap">
@@ -139,7 +139,7 @@
           </div>
         </div>
         <div>
-          <div class="offer">
+          <div class="offer" id="offerList">
             <h3>IFCがご提供できること</h3>
             <ul>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="10" height="18"/><path d="M14 9h6v12h-6M7 7h1M10 7h1M7 11h1M10 11h1M7 15h1M10 15h1M17 13h1M17 17h1"/></svg>空室改善提案・募集力強化</li>
@@ -156,10 +156,9 @@
             <svg viewBox="0 0 56 36" fill="none" stroke="#2b2f3a" stroke-width="1.6" stroke-linejoin="round"><path d="M2 14l10-8 8 4 8-4 8 4 8-4 10 8M12 6l-6 14 8 8M44 6l6 14-8 8M20 10l-6 8 4 4 8-6M24 26l4 4M28 22l6 6M32 18l6 6"/></svg>
           </button>
           <!-- アクション：P7へ -->
-          <button class="btn btn-primary btn-full" data-go="p7">無料で相談する<span class="arrow">›</span></button>
+          <button class="btn btn-orange" data-go="p7">無料で相談する<span class="arrow">›</span></button>
         </div>
       </div>
-      <div class="res-foot" id="resFoot"></div>
       <div class="btn-row">
         <!-- アクション：前ページ（P4）へ -->
         <button class="btn btn-ghost" data-go="p4">戻る</button>
@@ -236,6 +235,6 @@
 
 <div class="mock-toast" id="toast"></div>
 
-<script src="script.js?v=20261111-11"></script>
+<script src="script.js?v=20261111-12"></script>
 </body>
 </html>

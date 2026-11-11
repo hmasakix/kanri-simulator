@@ -19,6 +19,14 @@ const CONCERNS = [
   { id: 'inherit',   label: '相続や資産活用の相談がしたい', icon: 'people',   point: 5, solve: '相続や資産活用の専門家と連携し、トータルでサポートします' }
 ];
 const OTHER_POINT = 5;
+// 「IFCがご提供できること」5項目（上から順）と、関係するお悩み
+const OFFER_MAP = [
+  ['vacancy'],                    // 空室改善提案・募集力強化
+  ['proposal', 'rent', 'staff', 'cost'], // 収益改善のご提案
+  ['building', 'cost'],           // 建物管理・修繕計画のサポート
+  ['rent'],                       // 滞納保証・家賃保証で安心
+  ['inherit']                     // 相続・資産活用の相談対応
+];
 const OTHER_SOLVE = 'ご相談内容に合わせて、担当者が個別にご提案します';
 // 「その他」だけを選んだときに表示する一文
 const GENERAL_SOLVE = 'IFCがオーナー様の状況に合わせて、最適なご提案をします';
@@ -190,10 +198,14 @@ function renderResult() {
   }
   document.getElementById('resSolve').innerHTML = html;
 
-  const concernText = state.concerns.map(id =>
-    id === 'other' ? (state.other ? `その他（${escapeHtml(state.other)}）` : 'その他') : CONCERNS.find(x => x.id === id).label
-  ).join('、');
-  document.getElementById('resFoot').innerHTML = `お悩み：<b>${concernText}</b>管理状況：<b>${manage.label}</b>`;
+  // 「IFCがご提供できること」：選んだお悩みに関係する項目を強調し、ほかは薄く表示
+  const offerItems = document.querySelectorAll('#offerList li');
+  const hits = OFFER_MAP.map(ids => ids.some(id => picked.includes(id)));
+  const anyHit = hits.some(Boolean);
+  offerItems.forEach((li, i) => {
+    li.classList.toggle('on', anyHit && hits[i]);
+    li.classList.toggle('off', anyHit && !hits[i]); // 「その他」だけの場合は全項目をふつうに表示
+  });
 
   playResultAnimation(score, stars);
 }

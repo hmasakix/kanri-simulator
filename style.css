@@ -253,6 +253,9 @@ select:focus { outline: none; border-color: var(--navy); }
 .offer h3 { text-align: center; color: var(--navy); font-size: 17px; margin-bottom: 14px; }
 .offer li { list-style: none; display: flex; align-items: center; gap: 14px; padding: 13px 4px; border-bottom: 1px solid #ccd6ea; font-size: 14px; font-weight: 500; }
 .offer li:last-child { border-bottom: none; }
+.offer li { transition: opacity .3s; }
+.offer li.on { color: var(--navy); font-weight: 700; }          /* 選んだお悩みに関係する項目 */
+.offer li.off { opacity: .35; }                                  /* 関係しない項目は薄く */
 .offer svg { width: 24px; height: 24px; color: var(--navy); flex-shrink: 0; }
 
 /* 黄色枠（P6へのリンク） */
@@ -265,8 +268,6 @@ select:focus { outline: none; border-color: var(--navy); }
 .support-link svg { width: 56px; height: 36px; margin-top: 10px; }
 .support-link .more { display: block; font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--navy); margin-top: 6px; text-decoration: underline; }
 
-.res-foot { border-top: 1px dashed var(--line); margin-top: 24px; padding-top: 16px; font-size: 12px; color: var(--sub); }
-.res-foot b { color: var(--text); font-weight: 700; margin-right: 16px; }
 
 /* ---------- P6 管理会社変更の流れ ---------- */
 .flow-title { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
