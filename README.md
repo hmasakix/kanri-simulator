@@ -38,6 +38,7 @@ IFC様の賃貸管理HP向け「管理会社変更シミュレーター」のモ
 | top-illust.png | TOP画面のイラスト |
 | staff-1.png 〜 staff-4.png | 結果画面のスタッフのイラスト（手で案内するポーズ） |
 | staff-face-1.png 〜 staff-face-4.png | CTA画面のスタッフのイラスト（正面向き） |
+| staff-wave-1.png 〜 staff-wave-4.png | 管理会社変更の流れの画面のスタッフのイラスト（手を挙げたポーズ） |
 
 スタッフの番号は、1：矢嶋、2：佐藤、3：小山、4：石川 です。
 
