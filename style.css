@@ -437,6 +437,8 @@ select:focus { outline: none; border-color: var(--navy); }
   /* P5 スタッフからひとこと */
   .staff-img { width: 92px; }
   .flow-staff .staff-img { width: 76px; }          /* P6は吹き出しの文字が多いので少し小さく */
+  .flow-staff { justify-content: center; }
+  .flow-staff .staff-bubble { flex: 0 1 auto; max-width: 200px; padding: 12px 14px; } /* 文字の幅に合わせて吹き出しを縮める */
   .period-text { font-size: 15px; }
   .period-text em b { font-size: 24px; }
   .staff-text { font-size: 13px; }
