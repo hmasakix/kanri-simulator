@@ -125,13 +125,20 @@ concernList.innerHTML = CONCERNS.map(c => `
 concernList.addEventListener('change', e => {
   if (e.target.type !== 'checkbox') return;
   e.target.closest('.opt').classList.toggle('checked', e.target.checked);
+  // 「その他」のチェックを外したら、入力内容も消す（画面に見えない内容が結果に残らないように）
+  if (e.target.value === 'other' && !e.target.checked) {
+    document.getElementById('otherText').value = '';
+    state.other = '';
+  }
   state.concerns = [...concernList.querySelectorAll('input[type=checkbox]:checked')].map(i => i.value);
   document.getElementById('toP3').disabled = state.concerns.length === 0;
 });
 document.getElementById('otherText').addEventListener('input', e => {
   state.other = e.target.value.trim();
   const box = concernList.querySelector('input[value=other]');
+  // 入力したら「その他」に自動でチェック、文字をすべて消したらチェックも外す
   if (state.other && !box.checked) { box.checked = true; box.dispatchEvent(new Event('change', { bubbles: true })); }
+  if (!state.other && box.checked) { box.checked = false; box.dispatchEvent(new Event('change', { bubbles: true })); }
 });
 
 // ---------- P3 管理状況 ----------
