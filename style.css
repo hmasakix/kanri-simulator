@@ -34,8 +34,8 @@ body {
 }
 button { font-family: inherit; cursor: pointer; }
 .wrap { max-width: 980px; margin: 0 auto; padding: 40px 16px 60px; }
-.site-head { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin-bottom: 20px; }
-.site-head .logo { font-size: 22px; font-weight: 700; color: var(--navy); letter-spacing: .04em; }
+.site-head { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 20px; }
+.site-head .logo { display: block; height: 44px; width: auto; }   /* IFCのロゴ画像 */
 .site-head .tag { font-size: 13px; color: var(--sub); }
 
 .card {

@@ -30,6 +30,7 @@ IFC様の賃貸管理HP向け「管理会社変更シミュレーター」のモ
 | style.css | 見た目（色・配置・スマホ表示） |
 | script.js | 動き（画面の切り替え・スコア計算・演出） |
 | score-spec.md | 改善可能性スコアの仕様書 |
+| ifc-logo.png | IFCのロゴ（ヘッダー） |
 | top-illust.png | TOP画面のイラスト |
 | operator-a.png / operator-b.png / operator-c.png | CTA画面のオペレーターのイラスト（3種類） |
 
