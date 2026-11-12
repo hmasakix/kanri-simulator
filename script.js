@@ -28,11 +28,9 @@ const STAFF = [
 ];
 const pickStaff = () => STAFF[Math.floor(Math.random() * STAFF.length)];
 const staffLabel = m => `${m.title || 'IFCスタッフ'}　${m.name}より`; // 見出しは .staff-label（途中で改行しない指定あり）
-// P6「管理会社変更の流れ」のスタッフ（開くたびにランダム）
+// P6「管理会社変更の流れ」のスタッフ（開くたびにランダム。名前の見出しは出さない）
 function setFlowStaff() {
-  const m = pickStaff();
-  document.getElementById('flowStaffImg').src = m.img;
-  document.getElementById('flowStaffLabel').textContent = staffLabel(m);
+  document.getElementById('flowStaffImg').src = pickStaff().img;
 }
 const STAFF_MESSAGES = {
   vacancy:  '空室対策はお任せください。まずは募集条件と広告の見直しから、一緒に始めましょう。',
