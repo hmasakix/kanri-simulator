@@ -340,6 +340,7 @@ select:focus { outline: none; border-color: var(--navy); }
 .cta-sub { text-align: center; font-size: 13px; color: var(--sub); margin-bottom: 22px; }
 .can {
   background: var(--beige); border-radius: 8px; padding: 22px 24px; margin-bottom: 22px;
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px;
 }
 .can h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
 .can li { list-style: none; font-size: 13px; padding: 3px 0 3px 24px; position: relative; }
@@ -353,18 +354,22 @@ select:focus { outline: none; border-color: var(--navy); }
 .tel-box p { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
 .tel-box a { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-size: 26px; font-weight: 700; letter-spacing: .02em; }
 .tel-box a svg { width: 26px; height: 26px; color: var(--navy); }
-/* 私たちがご対応します（ロゴとスタッフ4人） */
-.team { text-align: center; margin-top: 22px; }
-.team-logo { display: block; height: 40px; width: auto; margin: 0 auto 8px; }
-.team-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
-.team-list { list-style: none; display: flex; justify-content: center; gap: 20px; }
-.team-list li { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+/* 私たちがご対応します（スタッフ4人：PCはリストの右、スマホはリストの下） */
+.team { text-align: center; }
+.team-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.team-list { list-style: none; display: flex; justify-content: center; gap: 8px; }
+.team-list li { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .team-face {                                       /* 丸く切り抜いて、顔が見えるように上寄せ */
-  width: 80px; height: 80px; border-radius: 50%; overflow: hidden;
-  background: var(--navy-light); display: flex; justify-content: center; align-items: flex-start;
+  width: 56px; height: 56px; border-radius: 50%; overflow: hidden;
+  background: #fff; display: flex; justify-content: center; align-items: flex-start;
 }
-.team-face img { width: 74%; height: auto; margin-top: 8%; }
-.team-name { font-size: 13px; font-weight: 700; }
+.team-face img { width: 74%; min-width: 0; max-width: 74%; height: auto; margin-top: 8%; }
+.can > * { min-width: 0; }                        /* 枠からはみ出さないように */
+.can .team-list li { padding: 0; }                /* 「できること」リストのチェックマークを付けない */
+.can .team-list li::before { content: none; }
+.team-name { font-size: 12px; font-weight: 700; }
+/* 一番下：IFCのロゴ（中央） */
+.team-logo { display: block; height: 40px; width: auto; margin: 24px auto 0; }
 .tel-box small { display: block; font-size: 12px; color: var(--sub); }
 
 /* モック用のお知らせ表示 */
@@ -426,8 +431,8 @@ select:focus { outline: none; border-color: var(--navy); }
   .staff-text { font-size: 13px; }
 
   /* P7 CTA */
+  .team-face { width: min(58px, calc((100vw - 142px) / 4)); height: min(58px, calc((100vw - 142px) / 4)); } /* 狭い画面でも4人が横一列に収まる大きさ */
   .team-list { gap: 10px; }
-  .team-face { width: 66px; height: 66px; }
   .can { grid-template-columns: 1fr; }
   .sub-btns { grid-template-columns: 1fr; }
 }
