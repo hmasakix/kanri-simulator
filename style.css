@@ -307,7 +307,15 @@ select:focus { outline: none; border-color: var(--navy); }
   border: 1px solid var(--line); border-radius: 4px; font-size: 12px; text-align: center;
   display: flex; align-items: center; justify-content: center; padding: 12px 4px; line-height: 1.5; min-height: 68px;
 }
-.flow .ifc { background: #f5f7fc; }
+/* オーナー様の行は軽く、IFCの行は紺色で目立たせる */
+.flow .row-label.owner { background: #e3e7ef; color: var(--sub); }
+.flow .cell.owner { color: var(--sub); font-size: 11px; min-height: 52px; background: #fff; }
+.flow .ifc { background: var(--navy); border-color: var(--navy); color: #fff; font-weight: 700; }
+.flow-lead {
+  display: block; width: fit-content; margin: 0 auto 16px; padding: 6px 16px; border-radius: 999px;
+  background: var(--navy-light); color: var(--navy); font-size: 14px; font-weight: 700; text-align: center; line-height: 1.5;
+}
+.flow-staff { max-width: 640px; margin: 20px auto 0; }
 
 /* 横スクロールのガイド（表がはみ出すときだけ表示） */
 .scroll-guide { display: none; margin-top: 12px; }

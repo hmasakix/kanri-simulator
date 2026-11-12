@@ -6,7 +6,7 @@
 <title>管理会社変更シミュレーター</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261112-14">
+<link rel="stylesheet" href="style.css?v=20261112-15">
 </head>
 <body>
 <div class="wrap">
@@ -165,12 +165,21 @@
     <div class="card">
       <p class="flow-title"><em>管理会社の変更</em>は、<br class="sp-only">意外とカンタンです。</p>
       <p class="flow-sub">IFCがしっかりサポートするので<br class="sp-only">ご安心ください。</p>
+      <p class="flow-lead">オーナー様のご対応は、<br class="sp-only">ほぼ“確認するだけ”です</p>
       <div class="flow" id="flowTable"></div>
       <div class="period">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7 14h2M11 14h2M15 14h2M7 17h2M11 17h2"/></svg>
         <span><em>最短<b>3〜4</b>週間</em>で管理会社の変更が完了します！</span>
       </div>
       <p class="flow-note">※スケジュールは物件の状況や現管理会社の対応により異なります。<br>※入居者様へのご案内や各種手続きはすべてIFCが対応します。</p>
+      <!-- スタッフからひとこと（スタッフは4人からランダム表示） -->
+      <div class="staff-msg flow-staff">
+        <div class="staff-bubble">
+          <p class="staff-label" id="flowStaffLabel"></p>
+          <p class="staff-text">入居者様へのご案内や各種手続きは、私たちにお任せください。ご不明な点は、何でもお気軽にご相談ください。</p>
+        </div>
+        <img class="staff-img" id="flowStaffImg" src="staff-1.png" alt="IFCのスタッフ" width="160" height="178">
+      </div>
       <div class="btn-row">
         <button class="btn btn-ghost" data-go="p5">結果に戻る</button>
         <button class="btn btn-primary btn-move" data-go="p7">無料で相談する<span class="arrow">›</span></button>
@@ -229,6 +238,6 @@
 
 <div class="mock-toast" id="toast"></div>
 
-<script src="script.js?v=20261112-14"></script>
+<script src="script.js?v=20261112-15"></script>
 </body>
 </html>

@@ -26,6 +26,14 @@ const STAFF = [
   { img: 'staff-3.png', name: '小山' },
   { img: 'staff-4.png', name: '石川' }
 ];
+const pickStaff = () => STAFF[Math.floor(Math.random() * STAFF.length)];
+const staffLabel = m => `${m.title || 'IFCスタッフ'}　${m.name}より`;
+// P6「管理会社変更の流れ」のスタッフ（開くたびにランダム）
+function setFlowStaff() {
+  const m = pickStaff();
+  document.getElementById('flowStaffImg').src = m.img;
+  document.getElementById('flowStaffLabel').textContent = staffLabel(m);
+}
 const STAFF_MESSAGES = {
   vacancy:  '空室対策はお任せください。まずは募集条件と広告の見直しから、一緒に始めましょう。',
   proposal: 'これからは私たちから改善策をご提案します。物件のことを気軽にご相談ください。',
@@ -80,7 +88,7 @@ const state = emptyState();
 function go(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (id === 'p6') requestAnimationFrame(updateFlowGuide);
+  if (id === 'p6') { requestAnimationFrame(updateFlowGuide); setFlowStaff(); }
 }
 document.addEventListener('click', e => {
   const btn = e.target.closest('[data-go]');
@@ -224,9 +232,9 @@ function renderResult() {
   document.getElementById('resSolve').innerHTML = html;
 
   // スタッフからひとこと：スタッフは4人からランダム、ひとことは最初に選んだお悩みに合わせる
-  const member = STAFF[Math.floor(Math.random() * STAFF.length)];
+  const member = pickStaff();
   document.getElementById('staffImg').src = member.img;
-  document.getElementById('staffLabel').textContent = `${member.title || 'IFCスタッフ'}　${member.name}より`;
+  document.getElementById('staffLabel').textContent = staffLabel(member);
   document.getElementById('staffText').textContent = STAFF_MESSAGES[picked[0]] || STAFF_MESSAGES.general;
 
   // 「IFCがご提供できること」：選んだお悩みに関係する項目を強調し、ほかは薄く表示
@@ -311,8 +319,8 @@ const flowIcon = k => ICON[k].replace('class="ic"', '');
 document.getElementById('flowTable').innerHTML =
   '<div></div>' +
   FLOW.map((f, i) => `<div class="head-step"><div class="num">0${i + 1}</div><div class="name">${f.name}</div>${flowIcon(f.icon)}</div>`).join('') +
-  '<div class="row-label">オーナー様が<br>行うこと</div>' +
-  FLOW.map(f => `<div class="cell">${f.owner}</div>`).join('') +
+  '<div class="row-label owner">オーナー様が<br>行うこと</div>' +
+  FLOW.map(f => `<div class="cell owner">${f.owner}</div>`).join('') +
   '<div class="row-label">IFCが<br>サポート<br>すること</div>' +
   FLOW.map(f => `<div class="cell ifc">${f.ifc}</div>`).join('');
 
