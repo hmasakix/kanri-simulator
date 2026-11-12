@@ -248,7 +248,7 @@ select:focus { outline: none; border-color: var(--navy); }
 .solve-item.hit { border-color: var(--navy); }
 .solve-item.wait { opacity: 0; transform: translateY(8px); }
 
-/* 担当スタッフからひとこと（吹き出しが左、スタッフが右） */
+/* スタッフからひとこと（吹き出しが左、スタッフが右） */
 .staff-msg {
   display: flex; align-items: flex-end; gap: 10px; margin-top: 16px;
   transition: opacity .35s ease, transform .35s ease;
@@ -411,7 +411,7 @@ select:focus { outline: none; border-color: var(--navy); }
   }
   .score { margin-right: 6px; }
 
-  /* P5 担当スタッフからひとこと */
+  /* P5 スタッフからひとこと */
   .staff-img { width: 92px; }
   .staff-text { font-size: 13px; }
 

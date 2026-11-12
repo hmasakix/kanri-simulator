@@ -19,8 +19,13 @@ const CONCERNS = [
   { id: 'inherit',   label: '相続や資産活用の相談がしたい', icon: 'people',   point: 5, solve: '相続や資産活用の専門家と連携し、トータルでサポートします' }
 ];
 const OTHER_POINT = 5;
-// 結果画面「担当スタッフからひとこと」
-const STAFF_IMAGES = ['staff-1.png', 'staff-2.png', 'staff-3.png', 'staff-4.png'];
+// 結果画面「スタッフからひとこと」（見出しは「IFCスタッフ　〇〇より」）
+const STAFF = [
+  { img: 'staff-1.png', name: '矢嶋' },
+  { img: 'staff-2.png', name: '佐藤' },
+  { img: 'staff-3.png', name: '小山' },
+  { img: 'staff-4.png', name: '石川' }
+];
 const STAFF_MESSAGES = {
   vacancy:  '空室対策はお任せください。まずは募集条件と広告の見直しから、一緒に始めましょう。',
   proposal: 'これからは私たちから改善策をご提案します。物件のことを気軽にご相談ください。',
@@ -211,8 +216,10 @@ function renderResult() {
   }
   document.getElementById('resSolve').innerHTML = html;
 
-  // 担当スタッフからひとこと：スタッフは4人からランダム、ひとことは最初に選んだお悩みに合わせる
-  document.getElementById('staffImg').src = STAFF_IMAGES[Math.floor(Math.random() * STAFF_IMAGES.length)];
+  // スタッフからひとこと：スタッフは4人からランダム、ひとことは最初に選んだお悩みに合わせる
+  const member = STAFF[Math.floor(Math.random() * STAFF.length)];
+  document.getElementById('staffImg').src = member.img;
+  document.getElementById('staffLabel').textContent = `IFCスタッフ　${member.name}より`;
   document.getElementById('staffText').textContent = STAFF_MESSAGES[picked[0]] || STAFF_MESSAGES.general;
 
   // 「IFCがご提供できること」：選んだお悩みに関係する項目を強調し、ほかは薄く表示
