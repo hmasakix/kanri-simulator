@@ -88,7 +88,7 @@ h2.q small { font-size: 12px; font-weight: 500; color: var(--sub); margin-left: 
   font-size: 15px; font-weight: 500;
 }
 .opt:hover { border-color: #b8c3d8; }
-.opt input { position: absolute; opacity: 0; pointer-events: none; }
+.opt input[type=checkbox], .opt input[type=radio] { position: absolute; opacity: 0; pointer-events: none; } /* チェック・ラジオだけ隠す（「その他」の入力欄は表示） */
 .opt .mark {
   width: 20px; height: 20px; border: 1.5px solid #9aa3b2; flex-shrink: 0;
   display: grid; place-items: center; background: #fff;
@@ -105,7 +105,7 @@ h2.q small { font-size: 12px; font-weight: 500; color: var(--sub); margin-left: 
 .opt.checked .mark.radio { background: #fff; }
 .opt.checked .mark.radio::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--navy); }
 .opt .other-input {
-  flex: 1; border: 1px solid var(--line); border-radius: 4px;
+  flex: 1; min-width: 0; width: 100%;               /* 画面幅からはみ出さないように */ border: 1px solid var(--line); border-radius: 4px;
   padding: 8px 12px; font-size: 14px; font-family: inherit; color: var(--text);
 }
 .opt .other-input:focus { outline: none; border-color: var(--navy); }
