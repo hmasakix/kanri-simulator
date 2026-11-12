@@ -6,7 +6,7 @@
 <title>管理会社変更シミュレーター</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261112-12">
+<link rel="stylesheet" href="style.css?v=20261112-13">
 </head>
 <body>
 <div class="wrap">
@@ -194,7 +194,6 @@
           </ul>
         </div>
         <!-- オペレーター画像（script.jsで3枚からランダム表示） -->
-        <img class="operator-img" id="operator-img" src="operator-a.png" alt="" width="130" height="137">
       </div>
       <button class="btn btn-orange" data-mock="無料相談の申込みフォームへ進みます（モックのため遷移なし）">無料相談を申し込む<span class="arrow">›</span></button>
       <div class="sub-btns">
@@ -209,6 +208,17 @@
         </a>
         <small>受付時間 9:00〜18:00<br class="sp-only">（定休日：水曜・日曜）</small>
       </div>
+      <!-- 私たちがご対応します（IFCのロゴとスタッフ4人） -->
+      <div class="team">
+        <img class="team-logo" src="ifc-logo.png" alt="IFC Corporation" width="498" height="188">
+        <p class="team-title">私たちがご対応します</p>
+        <ul class="team-list">
+          <li><span class="team-face"><img src="staff-face-1.png" alt="" width="112" height="175"></span><span class="team-name">矢嶋</span></li>
+          <li><span class="team-face"><img src="staff-face-2.png" alt="" width="124" height="178"></span><span class="team-name">佐藤</span></li>
+          <li><span class="team-face"><img src="staff-face-3.png" alt="" width="124" height="171"></span><span class="team-name">小山</span></li>
+          <li><span class="team-face"><img src="staff-face-4.png" alt="" width="118" height="169"></span><span class="team-name">石川</span></li>
+        </ul>
+      </div>
       <div class="btn-row">
         <button class="btn btn-ghost btn-full" data-go="p5">結果に戻る</button>
       </div>
@@ -218,6 +228,6 @@
 
 <div class="mock-toast" id="toast"></div>
 
-<script src="script.js?v=20261112-12"></script>
+<script src="script.js?v=20261112-13"></script>
 </body>
 </html>
