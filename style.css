@@ -289,9 +289,8 @@ select:focus { outline: none; border-color: var(--navy); }
 .support-link .more { display: block; font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--navy); margin-top: 6px; text-decoration: underline; }
 
 /* ---------- P6 管理会社変更の流れ ---------- */
-.flow-title { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.flow-title { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 14px; }
 .flow-title em { font-style: normal; color: var(--navy); }
-.flow-sub { text-align: center; font-size: 13px; color: var(--sub); margin-bottom: 24px; }
 .flow { display: grid; grid-template-columns: 96px repeat(6, 1fr); gap: 6px; overflow-x: auto; }
 .flow .head-step {
   background: linear-gradient(#eef2fb, #fff); border-radius: 60px 60px 0 0; text-align: center; padding: 14px 4px 10px;
