@@ -19,6 +19,18 @@ const CONCERNS = [
   { id: 'inherit',   label: '相続や資産活用の相談がしたい', icon: 'people',   point: 5, solve: '相続や資産活用の専門家と連携し、トータルでサポートします' }
 ];
 const OTHER_POINT = 5;
+// 結果画面「担当スタッフからひとこと」
+const STAFF_IMAGES = ['staff-1.png', 'staff-2.png', 'staff-3.png', 'staff-4.png'];
+const STAFF_MESSAGES = {
+  vacancy:  '空室対策はお任せください。まずは募集条件と広告の見直しから、一緒に始めましょう。',
+  proposal: 'これからは私たちから改善策をご提案します。物件のことを気軽にご相談ください。',
+  rent:     '周辺の相場をしっかり調べて、家賃を守るための方法をご提案します。',
+  staff:    'オーナー様からのご連絡には、専任の担当がすぐにお応えします。ご安心ください。',
+  building: '建物の状態を確認して、無理のない修繕計画を一緒に考えます。',
+  cost:     '修繕費やコストに無駄がないか、一つずつ一緒に見直していきましょう。',
+  inherit:  '相続や資産活用のご相談も、専門家と連携してしっかりサポートします。',
+  general:  'オーナー様のお悩みに合わせて、最適な方法をご提案します。まずはお気軽にご相談ください。'
+};
 // 「IFCがご提供できること」5項目（上から順）と、関係するお悩み
 const OFFER_MAP = [
   ['vacancy'],                    // 空室改善提案・募集力強化
@@ -199,6 +211,10 @@ function renderResult() {
   }
   document.getElementById('resSolve').innerHTML = html;
 
+  // 担当スタッフからひとこと：スタッフは4人からランダム、ひとことは最初に選んだお悩みに合わせる
+  document.getElementById('staffImg').src = STAFF_IMAGES[Math.floor(Math.random() * STAFF_IMAGES.length)];
+  document.getElementById('staffText').textContent = STAFF_MESSAGES[picked[0]] || STAFF_MESSAGES.general;
+
   // 「IFCがご提供できること」：選んだお悩みに関係する項目を強調し、ほかは薄く表示
   const offerItems = document.querySelectorAll('#offerList li');
   const hits = OFFER_MAP.map(ids => ids.some(id => picked.includes(id)));
@@ -221,7 +237,7 @@ function playResultAnimation(score, stars) {
 
   const scoreEl = document.getElementById('resScore');
   const starEls = document.querySelectorAll('#resStars svg');
-  const items = document.querySelectorAll('#resSolve .solve-item');
+  const items = document.querySelectorAll('#resSolve .solve-item, #staffMsg'); // 解決策のあとにスタッフのひとことも表示
   const lightStar = el => {
     const path = el.querySelector('path');
     path.setAttribute('fill', 'var(--star)');

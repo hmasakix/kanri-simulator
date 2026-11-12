@@ -6,7 +6,7 @@
 <title>管理会社変更シミュレーター</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261112-6">
+<link rel="stylesheet" href="style.css?v=20261112-7">
 </head>
 <body>
 <div class="wrap">
@@ -121,6 +121,14 @@
             <h3>あなたのお悩み、<br class="sp-only">IFCなら解決できます！</h3>
             <div id="resSolve"></div>
           </div>
+          <!-- 担当スタッフからひとこと（スタッフは4人からランダム表示） -->
+          <div class="staff-msg" id="staffMsg">
+            <div class="staff-bubble">
+              <p class="staff-label">担当スタッフからひとこと</p>
+              <p class="staff-text" id="staffText"></p>
+            </div>
+            <img class="staff-img" id="staffImg" src="staff-1.png" alt="IFCのスタッフ" width="160" height="178">
+          </div>
         </div>
         <div>
           <div class="offer" id="offerList">
@@ -210,6 +218,6 @@
 
 <div class="mock-toast" id="toast"></div>
 
-<script src="script.js?v=20261112-6"></script>
+<script src="script.js?v=20261112-7"></script>
 </body>
 </html>

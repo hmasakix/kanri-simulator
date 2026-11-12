@@ -247,6 +247,24 @@ select:focus { outline: none; border-color: var(--navy); }
 .solve-item:last-child { margin-bottom: 0; }
 .solve-item.hit { border-color: var(--navy); }
 .solve-item.wait { opacity: 0; transform: translateY(8px); }
+
+/* 担当スタッフからひとこと（吹き出しが左、スタッフが右） */
+.staff-msg {
+  display: flex; align-items: flex-end; gap: 10px; margin-top: 16px;
+  transition: opacity .35s ease, transform .35s ease;
+}
+.staff-msg.wait { opacity: 0; transform: translateY(8px); }
+.staff-bubble {
+  position: relative; flex: 1; min-width: 0;
+  background: #fff; border: 1px solid var(--navy); border-radius: 10px; padding: 14px 16px; margin-bottom: 24px;
+}
+.staff-bubble::after {                             /* 吹き出しのしっぽ（スタッフ側） */
+  content: ""; position: absolute; right: -8px; bottom: 18px; width: 14px; height: 14px;
+  background: #fff; border-right: 1px solid var(--navy); border-top: 1px solid var(--navy); transform: rotate(45deg);
+}
+.staff-label { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.staff-text { font-size: 14px; line-height: 1.7; }
+.staff-img { width: 112px; height: auto; flex-shrink: 0; }
 .solve-item .lbl { display: block; font-size: 12px; font-weight: 700; color: var(--navy); }
 .check { width: 20px; height: 20px; flex-shrink: 0; }
 
@@ -392,6 +410,10 @@ select:focus { outline: none; border-color: var(--navy); }
     font-size: min(24px, calc(100cqw / 10.2));
   }
   .score { margin-right: 6px; }
+
+  /* P5 担当スタッフからひとこと */
+  .staff-img { width: 92px; }
+  .staff-text { font-size: 13px; }
 
   /* P7 CTA */
   .can { grid-template-columns: 1fr; }
