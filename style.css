@@ -317,7 +317,10 @@ select:focus { outline: none; border-color: var(--navy); }
 .flow-staff { max-width: 640px; margin: 24px auto 14px; }
 /* P6の吹き出しは黄色（「最短3〜4週間」を伝える） */
 .flow-staff .staff-bubble { background: #fff8e6; border-color: #f3dca1; }
-.flow-staff .staff-bubble::after { background: #fff8e6; border-color: #f3dca1; }
+.flow-staff .staff-bubble::after {                /* しっぽを左側（スタッフ側）に */
+  right: auto; left: -8px; background: #fff8e6; border-color: #f3dca1;
+  border-right: none; border-top: none; border-left: 1px solid #f3dca1; border-bottom: 1px solid #f3dca1;
+}
 .period-text { display: block; font-size: 17px; font-weight: 700; margin-bottom: 4px; line-height: 1.5; }
 .period-text em { font-style: normal; color: var(--orange); font-size: 15px; }
 .period-text em b { font-size: 28px; margin: 0 2px; }

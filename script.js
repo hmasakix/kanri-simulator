@@ -21,16 +21,16 @@ const CONCERNS = [
 const OTHER_POINT = 5;
 // 結果画面「スタッフからひとこと」（見出しは「IFCスタッフ　〇〇より」。title があればそちらを使う）
 const STAFF = [
-  { img: 'staff-1.png', wave: 'staff-wave-1.png', name: '矢嶋', title: 'IFC代表取締役' },
-  { img: 'staff-2.png', wave: 'staff-wave-2.png', name: '佐藤' },
-  { img: 'staff-3.png', wave: 'staff-wave-3.png', name: '小山' },
-  { img: 'staff-4.png', wave: 'staff-wave-4.png', name: '石川' }
+  { img: 'staff-1.png', side: 'staff-side-1.png', name: '矢嶋', title: 'IFC代表取締役' },
+  { img: 'staff-2.png', side: 'staff-side-2.png', name: '佐藤' },
+  { img: 'staff-3.png', side: 'staff-side-3.png', name: '小山' },
+  { img: 'staff-4.png', side: 'staff-side-4.png', name: '石川' }
 ];
 const pickStaff = () => STAFF[Math.floor(Math.random() * STAFF.length)];
 const staffLabel = m => `${m.title || 'IFCスタッフ'}　${m.name}より`; // 見出しは .staff-label（途中で改行しない指定あり）
-// P6「管理会社変更の流れ」のスタッフ（開くたびにランダム。手を挙げたポーズ・名前の見出しは出さない）
+// P6「管理会社変更の流れ」のスタッフ（開くたびにランダム。吹き出しの左で右を向くポーズ・名前の見出しは出さない）
 function setFlowStaff() {
-  document.getElementById('flowStaffImg').src = pickStaff().wave;
+  document.getElementById('flowStaffImg').src = pickStaff().side;
 }
 const STAFF_MESSAGES = {
   vacancy:  '空室対策はお任せください。まずは募集条件と広告の見直しから、一緒に始めましょう。',
