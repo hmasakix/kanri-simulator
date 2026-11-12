@@ -199,6 +199,24 @@ select:focus { outline: none; border-color: var(--navy); }
 .feature .d { font-size: 12px; color: var(--sub); }
 .note { font-size: 12px; color: var(--sub); text-align: center; margin-top: 12px; }
 
+/* TOP：たとえば、こんなお悩み */
+.top-worry { background: var(--bg); border-radius: 8px; padding: 16px 20px; margin-bottom: 18px; text-align: center; }
+.top-worry-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.top-worry ul { list-style: none; display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; text-align: left; }
+.top-worry li { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; }
+.top-worry .chk { width: 18px; height: 18px; color: var(--navy); flex-shrink: 0; }
+
+/* TOP：IFCのスタッフがお答えします（ボタンの上） */
+.top-staff { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 14px; }
+.top-staff-list { list-style: none; display: flex; }
+.top-staff-list li {
+  width: 42px; height: 42px; border-radius: 50%; overflow: hidden; background: var(--navy-light);
+  border: 2px solid #fff; display: flex; justify-content: center; align-items: flex-start;
+}
+.top-staff-list li + li { margin-left: -8px; }      /* 顔を少し重ねて並べる */
+.top-staff-list img { width: 74%; height: auto; margin-top: 8%; }
+.top-staff p { font-size: 13px; font-weight: 700; color: var(--navy); }
+
 /* ---------- 診断中（P4→P5の間） ---------- */
 .loading { text-align: center; padding: 64px 28px; }
 .spinner {
@@ -412,8 +430,16 @@ select:focus { outline: none; border-color: var(--navy); }
   /* P1 TOP */
   .top { gap: 4px; }                                 /* イラストと文字の間を詰める */
   .top h1 { font-size: 26px; }
-  .features { grid-template-columns: 1fr; }
-  .feature { justify-content: flex-start; padding-left: calc(50% - 95px); } /* 3枚のアイコンの位置を縦にそろえる */
+  .features { grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; } /* 3つの特長を横一列にコンパクトに */
+  .feature { flex-direction: column; justify-content: flex-start; gap: 6px; padding: 12px 2px; text-align: center; }
+  .f-ic-wrap { width: 36px; height: 36px; }
+  .f-ic { width: 22px; height: 22px; }
+  .feature .t { font-size: min(13px, 3.4vw); margin-bottom: 2px; white-space: nowrap; }
+  .feature .d { font-size: min(10px, 2.5vw); line-height: 1.5; white-space: nowrap; }
+  .top-worry { padding: 14px 12px; }
+  .top-worry ul { flex-direction: column; }
+  .top-worry li { font-size: 13px; }
+  .top-staff { flex-direction: column; gap: 6px; }      /* 顔の下に文字（言葉の途中で改行しないように） */
   .top > div:last-child { container-type: inline-size; }
   .top .catch {                                       /* 「管理会社の変更って、実はカンタンです。」を1行に収める */
     white-space: nowrap;
@@ -452,6 +478,11 @@ select:focus { outline: none; border-color: var(--navy); }
   .team-list { gap: 10px; }
   .can { grid-template-columns: 1fr; }
   .sub-btns { grid-template-columns: 1fr; }
+}
+
+/* 幅の狭いスマホ（360px未満）：3つの特長は見出しとアイコンだけにする */
+@media (max-width: 359px) {
+  .feature .d { display: none; }
 }
 
 /* =========================================================
