@@ -213,8 +213,8 @@ select:focus { outline: none; border-color: var(--navy); }
   width: 42px; height: 42px; border-radius: 50%; overflow: hidden; background: var(--navy-light);
   border: 2px solid #fff; display: flex; justify-content: center; align-items: flex-start;
 }
-.top-staff-list li + li { margin-left: -8px; }      /* 顔を少し重ねて並べる */
-.top-staff-list img { width: 74%; height: auto; margin-top: 8%; }
+.top-staff-list li + li { margin-left: 4px; }       /* 振っている手が隠れないように、重ねずに並べる */
+.top-staff-list img { width: 96%; height: auto; margin-top: 6%; } /* 手を振るポーズ（手まで入るように少し大きめ） */
 .top-staff p { font-size: 13px; font-weight: 700; color: var(--navy); }
 
 /* ---------- 診断中（P4→P5の間） ---------- */
