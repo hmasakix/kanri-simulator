@@ -332,6 +332,7 @@ select:focus { outline: none; border-color: var(--navy); }
   border: solid var(--navy); border-width: 0 2px 2px 0; transform: rotate(45deg);
 }
 .can svg { width: 130px; height: 130px; }
+.can .operator-img { width: 130px; height: auto; }
 .sub-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
 .sub-btns .btn { height: 50px; font-size: 14px; border-color: #b7c2d6; }
 .tel-box { background: var(--bg); border-radius: 8px; text-align: center; padding: 20px 16px; margin-top: 22px; }
@@ -396,7 +397,8 @@ select:focus { outline: none; border-color: var(--navy); }
 
   /* P7 CTA */
   .can { grid-template-columns: 1fr; }
-  .can svg { justify-self: center; margin-top: -24px; }               /* オペレーターのイラストをリストの下・中央に表示 */
+  .can svg { justify-self: center; margin-top: -24px; }
+  .can .operator-img { justify-self: center; width: 120px; }        /* オペレーターのイラストをリストの下・中央に表示 */               /* オペレーターのイラストをリストの下・中央に表示 */
   .sub-btns { grid-template-columns: 1fr; }
 }
 

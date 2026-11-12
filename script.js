@@ -308,3 +308,11 @@ function updateFlowGuide() {
 }
 flowTable.addEventListener('scroll', updateFlowGuide, { passive: true });
 window.addEventListener('resize', updateFlowGuide);
+
+
+/* ---------- P7 CTA：オペレーター画像をランダム表示 ---------- */
+const operatorImages = ['operator-a.png', 'operator-b.png', 'operator-c.png'];
+const operatorImg = document.getElementById('operator-img');
+if (operatorImg) {
+  operatorImg.src = operatorImages[Math.floor(Math.random() * operatorImages.length)];
+}
