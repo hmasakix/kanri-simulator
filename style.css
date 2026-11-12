@@ -184,7 +184,7 @@ select:focus { outline: none; border-color: var(--navy); }
 
 /* ---------- P1 TOP ---------- */
 .top { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: center; margin-bottom: 26px; }
-.top-illust { width: 100%; }
+.top-illust { display: block; width: 100%; height: auto; }
 .top .catch { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
 .top h1 { font-size: 32px; line-height: 1.3; color: var(--navy); font-weight: 700; margin-bottom: 14px; }
 .top .lead { font-size: 14px; color: var(--sub); }
@@ -367,7 +367,6 @@ select:focus { outline: none; border-color: var(--navy); }
 
   /* P1 TOP */
   .top { gap: 4px; }                                 /* イラストと文字の間を詰める */
-  .top-illust { margin-top: -28px; }                 /* イラスト上の余白を詰める */
   .top h1 { font-size: 26px; }
   .features { grid-template-columns: 1fr; }
   .feature { justify-content: flex-start; padding-left: calc(50% - 95px); } /* 3枚のアイコンの位置を縦にそろえる */
