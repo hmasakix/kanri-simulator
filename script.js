@@ -27,7 +27,7 @@ const STAFF = [
   { img: 'staff-4.png', name: '石川' }
 ];
 const pickStaff = () => STAFF[Math.floor(Math.random() * STAFF.length)];
-const staffLabel = m => `${m.title || 'IFCスタッフ'}　${m.name}より`;
+const staffLabel = m => `${m.title || 'IFCスタッフ'}　${m.name}より`; // 見出しは .staff-label（途中で改行しない指定あり）
 // P6「管理会社変更の流れ」のスタッフ（開くたびにランダム）
 function setFlowStaff() {
   const m = pickStaff();

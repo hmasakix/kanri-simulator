@@ -262,7 +262,7 @@ select:focus { outline: none; border-color: var(--navy); }
   content: ""; position: absolute; right: -8px; bottom: 18px; width: 14px; height: 14px;
   background: #fff; border-right: 1px solid var(--navy); border-top: 1px solid var(--navy); transform: rotate(45deg);
 }
-.staff-label { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.staff-label { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 4px; word-break: keep-all; }
 .staff-text { font-size: 14px; line-height: 1.7; }
 .staff-img { width: 112px; height: auto; flex-shrink: 0; }
 .solve-item .lbl { display: block; font-size: 12px; font-weight: 700; color: var(--navy); }
@@ -315,7 +315,14 @@ select:focus { outline: none; border-color: var(--navy); }
   display: block; width: fit-content; margin: 0 auto 16px; padding: 6px 16px; border-radius: 999px;
   background: var(--navy-light); color: var(--navy); font-size: 14px; font-weight: 700; text-align: center; line-height: 1.5;
 }
-.flow-staff { max-width: 640px; margin: 20px auto 0; }
+.flow-staff { max-width: 640px; margin: 24px auto 14px; }
+/* P6の吹き出しは黄色（「最短3〜4週間」を伝える） */
+.flow-staff .staff-bubble { background: #fff8e6; border-color: #f3dca1; }
+.flow-staff .staff-bubble::after { background: #fff8e6; border-color: #f3dca1; }
+.period-text { display: block; font-size: 17px; font-weight: 700; margin-bottom: 4px; line-height: 1.5; }
+.period-text em { font-style: normal; color: var(--orange); font-size: 15px; }
+.period-text em b { font-size: 28px; margin: 0 2px; }
+.nb { display: inline-block; }                    /* 言葉の途中で改行しない */
 
 /* 横スクロールのガイド（表がはみ出すときだけ表示） */
 .scroll-guide { display: none; margin-top: 12px; }
@@ -332,13 +339,6 @@ select:focus { outline: none; border-color: var(--navy); }
 }
 .scroll-guide .thumb { position: absolute; top: 0; left: 0; height: 100%; background: var(--navy); border-radius: 2px; }
 
-.period {
-  margin: 24px auto 14px; max-width: 640px; background: #fff8e6; border: 1px solid #f3dca1; border-radius: 6px;
-  padding: 16px; display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 17px; font-weight: 700;
-}
-.period svg { width: 34px; height: 34px; color: var(--orange); }
-.period em { font-style: normal; color: var(--orange); font-size: 15px; }
-.period em b { font-size: 30px; margin: 0 2px; }
 .flow-note { font-size: 12px; color: var(--sub); max-width: 640px; margin: 0 auto; }
 #p6 .btn-row { max-width: 640px; margin-left: auto; margin-right: auto; align-items: center; }
 
@@ -436,6 +436,9 @@ select:focus { outline: none; border-color: var(--navy); }
 
   /* P5 スタッフからひとこと */
   .staff-img { width: 92px; }
+  .flow-staff .staff-img { width: 76px; }          /* P6は吹き出しの文字が多いので少し小さく */
+  .period-text { font-size: 15px; }
+  .period-text em b { font-size: 24px; }
   .staff-text { font-size: 13px; }
 
   /* P7 CTA */
