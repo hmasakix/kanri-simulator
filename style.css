@@ -270,7 +270,6 @@ select:focus { outline: none; border-color: var(--navy); }
 .support-link svg { width: 56px; height: 36px; margin-top: 10px; }
 .support-link .more { display: block; font-size: 24px; font-weight: 700; line-height: 1.4; color: var(--navy); margin-top: 6px; text-decoration: underline; }
 
-
 /* ---------- P6 管理会社変更の流れ ---------- */
 .flow-title { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
 .flow-title em { font-style: normal; color: var(--navy); }
@@ -331,7 +330,6 @@ select:focus { outline: none; border-color: var(--navy); }
   content: ""; position: absolute; left: 4px; top: 7px; width: 5px; height: 10px;
   border: solid var(--navy); border-width: 0 2px 2px 0; transform: rotate(45deg);
 }
-.can svg { width: 130px; height: 130px; }
 .can .operator-img { width: 130px; height: auto; }
 .sub-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
 .sub-btns .btn { height: 50px; font-size: 14px; border-color: #b7c2d6; }
@@ -397,8 +395,7 @@ select:focus { outline: none; border-color: var(--navy); }
 
   /* P7 CTA */
   .can { grid-template-columns: 1fr; }
-  .can svg { justify-self: center; margin-top: -24px; }
-  .can .operator-img { justify-self: center; width: 120px; }        /* オペレーターのイラストをリストの下・中央に表示 */               /* オペレーターのイラストをリストの下・中央に表示 */
+  .can .operator-img { justify-self: center; width: 120px; }        /* オペレーターのイラストをリストの下・中央に表示 */
   .sub-btns { grid-template-columns: 1fr; }
 }
 

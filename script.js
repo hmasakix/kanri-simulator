@@ -56,7 +56,8 @@ const FLOW = [
 ];
 
 // ---------- 入力内容 ----------
-const state = { concerns: [], other: '', manage: '', type: '', age: '', units: '', area: '' };
+const emptyState = () => ({ concerns: [], other: '', manage: '', type: '', age: '', units: '', area: '' });
+const state = emptyState();
 
 // ---------- 画面切り替え ----------
 function go(id) {
@@ -266,7 +267,7 @@ function escapeHtml(s) {
 
 // 最初からやり直す：入力をすべて消してTOPへ
 document.getElementById('restart').addEventListener('click', () => {
-  Object.assign(state, { concerns: [], other: '', manage: '', type: '', age: '', units: '', area: '' });
+  Object.assign(state, emptyState());
   document.querySelectorAll('input[type=checkbox], input[type=radio]').forEach(i => i.checked = false);
   document.querySelectorAll('.opt').forEach(o => o.classList.remove('checked'));
   document.getElementById('otherText').value = '';
@@ -309,8 +310,7 @@ function updateFlowGuide() {
 flowTable.addEventListener('scroll', updateFlowGuide, { passive: true });
 window.addEventListener('resize', updateFlowGuide);
 
-
-/* ---------- P7 CTA：オペレーター画像をランダム表示 ---------- */
+// ---------- P7 CTA：オペレーター画像をランダム表示 ----------
 const operatorImages = ['operator-a.png', 'operator-b.png', 'operator-c.png'];
 const operatorImg = document.getElementById('operator-img');
 if (operatorImg) {
