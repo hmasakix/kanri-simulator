@@ -202,8 +202,8 @@ function renderResult() {
     `<div class="solve-item hit">${check}<span>${label ? `<span class="lbl">${label}</span>` : ''}${text}</span></div>`;
   let html = '';
   if (picked.length === 0) {
-    // 「その他」だけの場合は、一般的な一文
-    html = item('', GENERAL_SOLVE);
+    // 「その他」だけの場合は、一般的な一文（入力内容があれば見出しに表示）
+    html = item(state.other ? `「${escapeHtml(state.other)}」への対策` : '', GENERAL_SOLVE);
   } else {
     picked.forEach(id => {
       const c = CONCERNS.find(x => x.id === id);
