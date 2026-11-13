@@ -440,6 +440,10 @@ select:focus { outline: none; border-color: var(--navy); }
   .top-worry ul { flex-direction: column; }
   .top-worry li { font-size: 13px; }
   .top-staff { flex-direction: column; gap: 6px; }      /* 顔の下に文字（言葉の途中で改行しないように） */
+  .top-staff-list { width: 100%; justify-content: space-between; gap: 8px; } /* 4人を横幅いっぱいに */
+  .top-staff-list li { flex: 1; width: auto; height: auto; aspect-ratio: 1; max-width: 84px; }
+  .top-staff-list li + li { margin-left: 0; }
+  .top-staff p { font-size: 14px; }
   .top > div:last-child { container-type: inline-size; }
   .top .catch {                                       /* 「管理会社の変更って、実はカンタンです。」を1行に収める */
     white-space: nowrap;
