@@ -178,9 +178,39 @@ function checkP4() {
   document.getElementById('toP5').disabled = !(state.type && state.age && state.units && state.area);
 }
 // 「結果を見る」→「診断中…」を約1.2秒表示してから結果へ
-document.getElementById('toP5').addEventListener('click', () => {
+// AIのおすすめコメント（/api/comment）。診断中の画面のあいだに作る
+// 失敗したときや5秒を超えたときは空文字を返し、決まった一文を表示する
+let aiComment = '';
+async function fetchAiComment() {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 5000);
+  try {
+    const res = await fetch('/api/comment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        concerns: state.concerns, other: state.other, manage: state.manage,
+        type: state.type, age: state.age, units: state.units, area: state.area
+      }),
+      signal: ctrl.signal
+    });
+    if (!res.ok) return '';
+    const data = await res.json();
+    return typeof data.comment === 'string' ? data.comment : '';
+  } catch {
+    return '';
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// 「結果を見る」→「診断中…」（最低1.2秒・AIのコメントができるまで）→ 結果へ
+document.getElementById('toP5').addEventListener('click', async () => {
   go('loading');
-  setTimeout(() => { renderResult(); go('p5'); }, 1200);
+  const [comment] = await Promise.all([fetchAiComment(), new Promise(r => setTimeout(r, 1200))]);
+  aiComment = comment;
+  renderResult();
+  go('p5');
 });
 
 // ---------- P5 結果 ----------
@@ -233,7 +263,7 @@ function renderResult() {
   const member = pickStaff();
   document.getElementById('staffImg').src = member.img;
   document.getElementById('staffLabel').textContent = staffLabel(member);
-  document.getElementById('staffText').textContent = STAFF_MESSAGES[picked[0]] || STAFF_MESSAGES.general;
+  document.getElementById('staffText').textContent = aiComment || STAFF_MESSAGES[picked[0]] || STAFF_MESSAGES.general; // AIのコメントがなければ決まった一文
 
   // 「IFCがご提供できること」：選んだお悩みに関係する項目を強調し、ほかは薄く表示
   const offerItems = document.querySelectorAll('#offerList li');
